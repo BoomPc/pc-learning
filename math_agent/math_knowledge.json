@@ -1,0 +1,245 @@
+{
+  "version": "2026-10-10-v1",
+  "cards": [
+    {
+      "id": "congruence",
+      "title": "三角形全等对应关系",
+      "keywords": "全等 SAS SSS ASA AAS HL 旋转",
+      "conditions": "先确定顶点一一对应；SAS 的角必须夹在两条对应边之间；HL 限定直角三角形。",
+      "method": "写出对应顶点顺序，再列相等边角，用 SSS/SAS/ASA/AAS/HL 判定。",
+      "pitfalls": "SSA 和 AAA 不能直接判定全等；数值样例相等不代替一般证明。",
+      "construction": "用 length_ratio=1、angle、perpendicular 核验图中的边角。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "similar",
+      "title": "相似与面积比",
+      "keywords": "相似 比例 面积比 AA SAS SSS",
+      "conditions": "AA 需两组对应角相等；SAS 需夹角相等且两边比相等；SSS 需三边成比例。",
+      "method": "相似比为 k 时，对应边长比为 k，面积比为 k^2。",
+      "pitfalls": "面积比不能直接当边长比；先确认对应顶点顺序。",
+      "construction": "length_ratio 核验对应边；area 或坐标面积表达式核验面积。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "bisector",
+      "title": "角平分线与距离",
+      "keywords": "角平分线 平分 垂足 距离 等腰",
+      "conditions": "角内一点在角平分线上时，到角两边所在直线的垂直距离相等。",
+      "method": "分别作到两边的垂足，以直角三角形全等或等距性质推进。",
+      "pitfalls": "到边的距离必须是垂线段；不要任意选择角平分线与另一线的交点。",
+      "construction": "垂足用 foot；已定义两线的交点用 intersect；equal distance 用 length_ratio=1。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "area_ratio",
+      "title": "同高与同底三角形面积",
+      "keywords": "面积比 面积 同高 同底 割补",
+      "conditions": "比较的高必须相同，或底边必须相同；面积均指非负面积。",
+      "method": "同高时面积比等于底边比，同底时面积比等于高之比；可用整体面积减分块面积。",
+      "pitfalls": "点在线段外时要重新判断分块的加减，不能沿用内部情况。",
+      "construction": "面积从实际顶点计算；禁止把答案常数作左右两边。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "parallelogram",
+      "title": "平行四边形构造",
+      "keywords": "平行四边形 对角线 平行 等边 中点",
+      "conditions": "四个顶点按边界顺序 A B C D；相邻两边不可共线。",
+      "method": "对边平行且相等；对角线互相平分；邻角互补。",
+      "pitfalls": "不能误将不相邻的三个点作为顺次顶点；相等边不必平行。",
+      "construction": "construct:{op:parallelogram,pts:[A,B,C,D]}，已知三个顶点构造第四点。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "rotation",
+      "title": "旋转与方向",
+      "keywords": "旋转 顺时针 逆时针 角度 动点",
+      "conditions": "旋转中心、角度和方向都需明确，同一刚体的点用相同旋转。",
+      "method": "旋转保持长度和角度；连接旋转中心与对应点可得等腰三角形。",
+      "pitfalls": "顺时针为负角；不要独立猜每个旋转点坐标。",
+      "construction": "{op:rotate,name:P,from:B,around:E,deg:\"-60\"}；动角用 t，deg 单位是度。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "reflection",
+      "title": "折叠与轴对称",
+      "keywords": "折叠 对称 垂直平分线 镜像",
+      "conditions": "折痕是一条非退化直线；原点与像点关于折痕对称。",
+      "method": "折痕垂直平分对应点连线；折叠保持线段长度及角度。",
+      "pitfalls": "像点不是简单交换 x/y；只有特定对称轴才成立。",
+      "construction": "{op:reflect,name:Ap,from:A,line:[E,F]}；折痕交点用 intersect。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "intersection",
+      "title": "两直线交点",
+      "keywords": "交点 共线 延长线 求交 相交",
+      "conditions": "两条直线分别由两个不同的点确定，且不平行。",
+      "method": "交点同时在两条直线上；若题目限定线段或射线，另核验位置。",
+      "pitfalls": "仅满足一条共线条件不够；平行或重合时没有唯一交点。",
+      "construction": "{op:intersect,name:G,ab:[A,C],cd:[D,E]}；两条 collinear 断言加 on_segment/on_extension。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "foot",
+      "title": "垂足与垂直投影",
+      "keywords": "垂足 作垂线 垂直 高 距离",
+      "conditions": "被投影的直线由两个不同点确定；垂足不一定在线段内部。",
+      "method": "垂足在目标直线上，投影线段垂直目标直线。",
+      "pitfalls": "不能把垂足限制在线段上，除非原题明确；高可能在三角形外。",
+      "construction": "{op:foot,name:H,from:P,line:[A,B]}；collinear(A,H,B)、perpendicular(PH,AB)。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "section",
+      "title": "内分中点与延长",
+      "keywords": "中点 分点 截取 比例 延长 线段",
+      "conditions": "内分点满足正的分段比；延长线要区分哪一端和方向。",
+      "method": "中点等分线段；按 AP:PB=m:n 内分时使用 section。",
+      "pitfalls": "不能把 AP:AB 当成 AP:PB；延长线不能用线段内分代替。",
+      "construction": "mid {name:M,a:A,b:B}；section {name:P,a:A,b:B,ratio:[\"m\",\"n\"]}。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "polar",
+      "title": "射线上截取相等长度",
+      "keywords": "射线 截取 长度 相等 延长",
+      "conditions": "射线起点与方向点不同，截取长度非负。",
+      "method": "沿已知方向取指定距离；距离来自已知长度或另一线段。",
+      "pitfalls": "不要照示意图估计点坐标；负距离会改变射线方向。",
+      "construction": "{op:polar,name:G,o:E,along:C,len:\"sqrt((E_x-F_x)^2+(E_y-F_y)^2)\"} 表示沿 EC 取 EG=EF。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "pythagoras",
+      "title": "勾股定理及逆定理",
+      "keywords": "勾股 直角 边长 平方 根号",
+      "conditions": "正向须已知直角；逆向须三边构成三角形，最长边平方等于另两边平方和。",
+      "method": "直角三角形两直角边平方和等于斜边平方。",
+      "pitfalls": "必须确认哪条是斜边；多解时按长度正值和位置筛选。",
+      "construction": "algebra_batch 解平方方程；triangle 用 sides 或直角加两边构造。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "triangle",
+      "title": "基础三角形与退化",
+      "keywords": "三角形 SSS SAS 等腰 等边 构图",
+      "conditions": "SSS 满足任意两边和大于第三边；SAS 的角为两条已知边夹角，角在0至180度内。",
+      "method": "可由足够的边角信息确定底图；自由形状只能用作示意。",
+      "pitfalls": "不可任意改边长让断言通过；图中数值算例不能证明任意三角形命题。",
+      "construction": "triangle pts:[A,B,C], sides:[{ab:AB,len:\"...\"},...],origin:A,xaxis:B。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "parallel",
+      "title": "平行线与角",
+      "keywords": "平行 同位角 内错角 同旁内角",
+      "conditions": "要明确两条直线及截线，各角顶点和方向对应。",
+      "method": "平行线的同位角、内错角相等，同旁内角互补；可用逆命题判定平行。",
+      "pitfalls": "角度相等但位置不对应时不能套用。",
+      "construction": "parallel 的 ab/cd 各含两个不同点；另列 angle 断言。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "quadratic",
+      "title": "二次函数解析式与顶点",
+      "keywords": "二次函数 抛物线 顶点 对称轴 待定系数",
+      "conditions": "y=a*x^2+b*x+c 且 a非零；点确实属于该函数图象。",
+      "method": "已知点代入求系数；配方得顶点式与对称轴。",
+      "pitfalls": "不同小问的 y1/y2 可能是不同函数；不能继承错误系数。",
+      "construction": "algebra_batch solve 待定系数；functions 用确切解析式，xa/xb 覆盖全部相关点。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "discriminant",
+      "title": "交点与判别式",
+      "keywords": "相切 交点 判别式 两根 一个交点",
+      "conditions": "代入消元后为二次方程且二次项系数非零；还要满足原函数定义域。",
+      "method": "判别式大于零两个实根、等于零重根、小于零无实根；退化为一次时单独讨论。",
+      "pitfalls": "忽略 a=0 会漏解；代数根须代回原式并筛定义域。",
+      "construction": "algebra_batch 求解与化简判别式；每个临界参数用精确 snaps 和 t 断言。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "rational",
+      "title": "反比例与分式定义域",
+      "keywords": "反比例 分式 定义域 分母 双曲线",
+      "conditions": "反比例 y=k/x 中 k非零，x非零；分式分母不能为零。",
+      "method": "把点坐标代入求 k；求交时消分母后验根。",
+      "pitfalls": "乘分母后可能引入无效根；跨越极点不能把曲线连成一段。",
+      "construction": "分支按定义域设置 functions xa/xb；参数根过滤 x=0 等禁值。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "case_split",
+      "title": "分类讨论与多解完整性",
+      "keywords": "分类 多解 延长线上 线段上 两种情况 参数",
+      "conditions": "分类依据应覆盖原题全部允许位置，分类之间互斥或明确重叠。",
+      "method": "逐类保留条件、结论和对应图；用原题排除端点、重合及退化解。",
+      "pitfalls": "不能为省图漏掉一种答案；插值中间位置未必是原题合法状态。",
+      "construction": "每个答案值列 snaps，结论断言写对应 t；滑条范围覆盖全部值。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "equilateral",
+      "title": "等边等腰与特殊角",
+      "keywords": "等边 等腰 60 120 30 45 三线合一",
+      "conditions": "等边三角形三边相等、三角均60度；等腰需确认相等腰及底边。",
+      "method": "等腰底角相等；等边可由两边相等且夹角60度推出；顶角平分线兼底边中线和高。",
+      "pitfalls": "120度是外角或另一个角时，不可直接认定该三角形等边。",
+      "construction": "rotate 60度构造等边点时须选正确方向；angle 检查实际夹角。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "circle",
+      "title": "圆与切线",
+      "keywords": "圆 切线 垂径 圆周角 半径",
+      "conditions": "切点必须在圆上；切线垂直经过切点的半径。",
+      "method": "同弧所对圆周角相等；直径所对圆周角为直角；垂径平分弦需满足相应条件。",
+      "pitfalls": "过圆外点的任意垂线不都是切线；先核验切点在圆上。",
+      "construction": "长度断言核验半径，perpendicular 核验半径与切线，交点必须取正确分支。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "area_coordinates",
+      "title": "绘图面积计算与证明分离",
+      "keywords": "坐标 面积 三角形 面积比 图形 核验",
+      "conditions": "顶点坐标来自题设和构造；多边形顶点按边界顺序，不能自交。",
+      "method": "内部校验用坐标计算面积，学生证明用底乘高除二、割补、相似或同高面积比。",
+      "pitfalls": "不能拿答案面积常量来冒充图中面积；数值检验不是一般证明。",
+      "construction": "area kind:pts:[A,B,C],value:\"目标面积\"；比值用实际坐标行列式之比并排除分母零。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "invariants",
+      "title": "动点图形不变量",
+      "keywords": "动点 滑条 不变量 轨迹 旋转 折叠",
+      "conditions": "每个位置都应满足点的定义，特殊结论仅在指定参数值成立。",
+      "method": "基础参数变化后派生点继续由构造求出；检查端点、内部样点和全部答案位置。",
+      "pitfalls": "滑条标签变而图不变不等于动态演示；采样通过不是连续区间的证明。",
+      "construction": "geometry_check 采样校验；givens 不写固定 t，特殊 asserts 指定精确 t。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "reference",
+      "title": "参考答案矛盾与笔误",
+      "keywords": "笔误 矛盾 参考答案 编号 读题",
+      "conditions": "原题条件优先；答案仅作参考，必须与原题及后续推理交叉核对。",
+      "method": "可确定的笔误注明并纠正；不能确定的关键条件需标 blocked。",
+      "pitfalls": "不能为迁就参考答案改原题条件，也不能照抄自相矛盾的中间式。",
+      "construction": "algebra_batch 核算等式；geometry_check 检查题设与坐标是否同时成立。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    },
+    {
+      "id": "curriculum",
+      "title": "学生证明与计算工具分工",
+      "keywords": "初中 综合法 证明 超纲 工具 坐标",
+      "conditions": "内部坐标计算服务于绘图，学生呈现遵循初中允许的证明方法。",
+      "method": "先列题设和待证，再用全等、相似、勾股、平行线、面积等建立论证。",
+      "pitfalls": "不要把工具算出的一个例子写成一般证明；不要把内部高级方法直接呈现给学生。",
+      "construction": "保留独立证明审核；MCP ok 只代表提交的计算或几何检查通过。",
+      "provenance": "项目整理的通用初中数学方法与现有构图协议；非题库答案"
+    }
+  ]
+}

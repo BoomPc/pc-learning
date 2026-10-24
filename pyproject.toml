@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "math-agent-linux"
+version = "0.4.0"
+description = "DeepSeek 初中数学 Agent：来源保留、工具核验、受限修复与网页生成"
+requires-python = ">=3.11"
+dependencies = [
+  "Flask>=3.1,<4", "waitress>=3,<4", "httpx>=0.28,<0.29",
+  "pydantic>=2.10,<3", "Pillow>=11,<13", "redis>=5,<7",
+  "sympy>=1.13,<2", "playwright>=1.50,<2", "jsonschema>=4.23,<5",
+  "langgraph>=1,<2"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
+
+[project.scripts]
+math-agent = "math_agent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["math_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+
+[tool.setuptools.package-data]
+math_agent = ["math_knowledge.json", "web/*.html", "jsxgraph/*.html", "jsxgraph/*.js", "jsxgraph/vendor/*"]

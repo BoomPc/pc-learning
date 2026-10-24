@@ -1,0 +1,468 @@
+{
+  "source": {
+    "topic_family": "unknown",
+    "title": "2024连山区一模第52题：中线构造与旋转综合",
+    "problem_text": "52.（2024·连山区一模）【问题初探】\n(1) 如图1，AD是△ABC的中线，BE交AC于点E，交AD于点F，且AE=EF，求证：AC=BF。\n小明和小亮两名同学从不同角度进行思考，给出了两种解题思路。\n①小明同学的思考过程：如图2，延长FD到点G，使DG=DF，连接CG，构造△DGC…；\n②小亮同学的解题思路与小明基本一致，也是构造三角形，只是构造方法不同。如图3，过点B作BG∥AC交AD延长线于点G，于是得到△BDG…；\n请你选择一名同学的解题思路，写出解答过程。\n【迁移应用】\n(2) 请你依照上述两名同学的解题思路或者按照自己的思路，解答下面问题。\n如图4，已知等边△ABC中，D为BC边上一动点，连接AD，将AD绕点D顺时针旋转120°得到DE，连接BE，取BE中点F，连接DF，猜想CD与DF的数量关系，并证明你的猜想。\n【能力提升】\n(3) 如图5，已知△ABC中，AB=AC，∠BAC=90°，点D是斜边BC上的一点，且BD<CD，连接AD，将线段AD绕D点顺时针旋转90°，得到线段DE，连接线段BE，点F为线段BE的中点，连接DF。若∠CDE=15°，DF=√2，求线段CD的长度。",
+    "conditions": [
+      {
+        "quote": "已知等边△ABC中",
+        "question_ids": [
+          "Q2"
+        ],
+        "id": "C6",
+        "text": "△ABC为等边三角形",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "D为BC边上一动点，连接AD",
+        "question_ids": [
+          "Q2"
+        ],
+        "id": "C7",
+        "text": "D为BC边上一动点，连接AD",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "将AD绕点D顺时针旋转120°得到DE，连接BE",
+        "question_ids": [
+          "Q2"
+        ],
+        "id": "C8",
+        "text": "将AD绕点D顺时针旋转120°得到DE，连接BE",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "取BE中点F，连接DF",
+        "question_ids": [
+          "Q2"
+        ],
+        "id": "C9",
+        "text": "取BE中点F，连接DF",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q2",
+        "text": "猜想CD与DF的数量关系，并证明你的猜想。"
+      }
+    ],
+    "reference_summary": "",
+    "uncertainties": []
+  },
+  "candidate": {
+    "solutions": [
+      {
+        "question_id": "Q2",
+        "result": "CD=2DF。",
+        "steps": [
+          {
+            "basis_ids": [
+              "C9"
+            ],
+            "premise": "延长ED至H，使DH=DE。",
+            "rule": "辅助线构造",
+            "conclusion": "D是EH的中点，且H,D,E共线。"
+          },
+          {
+            "basis_ids": [
+              "C9",
+              "Q2:S1"
+            ],
+            "premise": "F是BE的中点，D是EH的中点。",
+            "rule": "三角形中位线定理",
+            "conclusion": "DF是△EBH的中位线，所以BH=2DF。"
+          },
+          {
+            "basis_ids": [
+              "C8"
+            ],
+            "premise": "将AD绕点D顺时针旋转120°得到DE。",
+            "rule": "旋转的性质",
+            "conclusion": "AD=DE，∠ADE=120°。"
+          },
+          {
+            "basis_ids": [
+              "Q2:S1",
+              "Q2:S3"
+            ],
+            "premise": "H在ED的延长线上，DH=DE。",
+            "rule": "平角定义；等量代换",
+            "conclusion": "∠ADH=180°−∠ADE=60°，且DH=AD。"
+          },
+          {
+            "basis_ids": [
+              "Q2:S4"
+            ],
+            "premise": "DH=AD，∠ADH=60°。",
+            "rule": "等腰三角形两底角相等；三角形内角和",
+            "conclusion": "△AHD是等边三角形，所以AH=AD，∠HAD=60°。"
+          },
+          {
+            "basis_ids": [
+              "C6"
+            ],
+            "premise": "△ABC是等边三角形。",
+            "rule": "等边三角形的性质",
+            "conclusion": "AB=AC，∠BAC=60°。"
+          },
+          {
+            "basis_ids": [
+              "C7",
+              "Q2:S5",
+              "Q2:S6"
+            ],
+            "premise": "D在BC上，AD在∠BAC内部；∠HAD=60°，∠BAC=60°。",
+            "rule": "角的和差",
+            "conclusion": "∠HAB=∠HAD−∠BAD=60°−∠BAD，∠DAC=∠BAC−∠BAD=60°−∠BAD，所以∠HAB=∠DAC。"
+          },
+          {
+            "basis_ids": [
+              "Q2:S5",
+              "Q2:S7",
+              "Q2:S6"
+            ],
+            "premise": "AH=AD，∠HAB=∠DAC，AB=AC。",
+            "rule": "SAS",
+            "conclusion": "△HAB≌△DAC，所以BH=CD。"
+          },
+          {
+            "basis_ids": [
+              "Q2:S2",
+              "Q2:S8"
+            ],
+            "premise": "BH=2DF，BH=CD。",
+            "rule": "等量代换",
+            "conclusion": "CD=2DF。"
+          }
+        ],
+        "cases": [
+          "当D与C重合时，CD=DF=0，结论仍成立；当D与B重合时，按同一中位线证明仍成立。"
+        ],
+        "domain_and_boundaries": "D在BC上，图形取非退化情形；端点D=B、D=C时按长度连续情形检验，结论不变。",
+        "condition_ids": [
+          "C6",
+          "C7",
+          "C8",
+          "C9"
+        ]
+      }
+    ],
+    "spec": {
+      "format": "jsxgraph-v1",
+      "title": "2024连山区一模第52题：中线构造与旋转综合",
+      "problem_text": "52.（2024·连山区一模）【问题初探】\n(1) 如图1，AD是△ABC的中线，BE交AC于点E，交AD于点F，且AE=EF，求证：AC=BF。\n小明和小亮两名同学从不同角度进行思考，给出了两种解题思路。\n①小明同学的思考过程：如图2，延长FD到点G，使DG=DF，连接CG，构造△DGC…；\n②小亮同学的解题思路与小明基本一致，也是构造三角形，只是构造方法不同。如图3，过点B作BG∥AC交AD延长线于点G，于是得到△BDG…；\n请你选择一名同学的解题思路，写出解答过程。\n【迁移应用】\n(2) 请你依照上述两名同学的解题思路或者按照自己的思路，解答下面问题。\n如图4，已知等边△ABC中，D为BC边上一动点，连接AD，将AD绕点D顺时针旋转120°得到DE，连接BE，取BE中点F，连接DF，猜想CD与DF的数量关系，并证明你的猜想。\n【能力提升】\n(3) 如图5，已知△ABC中，AB=AC，∠BAC=90°，点D是斜边BC上的一点，且BD<CD，连接AD，将线段AD绕D点顺时针旋转90°，得到线段DE，连接线段BE，点F为线段BE的中点，连接DF。若∠CDE=15°，DF=√2，求线段CD的长度。",
+      "tabs": [
+        {
+          "tab_title": "Q2",
+          "board": {
+            "viewport": "fit_points",
+            "axis": true,
+            "objects": [
+              {
+                "id": "A",
+                "label": "A",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  "sqrt(3)"
+                ]
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  -1.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  1.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "D",
+                "label": "D",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  "1/5",
+                  0.0
+                ]
+              },
+              {
+                "id": "E",
+                "label": "E",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "A",
+                  "D"
+                ],
+                "direction": "clockwise",
+                "degrees": 120.0
+              },
+              {
+                "id": "F",
+                "label": "F",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "midpoint",
+                "parents": [
+                  "B",
+                  "E"
+                ]
+              },
+              {
+                "id": "H",
+                "label": "H",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "E",
+                  "D"
+                ],
+                "direction": "clockwise",
+                "degrees": 180.0
+              },
+              {
+                "id": "segAB",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "B"
+                ]
+              },
+              {
+                "id": "segBC",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "C"
+                ]
+              },
+              {
+                "id": "segCA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "A"
+                ]
+              },
+              {
+                "id": "segAD",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "D"
+                ]
+              },
+              {
+                "id": "segDE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "D",
+                  "E"
+                ]
+              },
+              {
+                "id": "segBE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "E"
+                ]
+              },
+              {
+                "id": "segDF",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "D",
+                  "F"
+                ]
+              },
+              {
+                "id": "segAH",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": true,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "H"
+                ]
+              },
+              {
+                "id": "segBH",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": true,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "H"
+                ]
+              },
+              {
+                "id": "segDH",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": true,
+                "kind": "segment",
+                "parents": [
+                  "D",
+                  "H"
+                ]
+              }
+            ]
+          },
+          "steps": [
+            {
+              "head": "辅助线构造",
+              "content": "延长ED至H，使DH=DE。\nD是EH的中点，且H,D,E共线。"
+            },
+            {
+              "head": "三角形中位线定理",
+              "content": "F是BE的中点，D是EH的中点。\nDF是△EBH的中位线，所以BH=2DF。"
+            },
+            {
+              "head": "旋转的性质",
+              "content": "将AD绕点D顺时针旋转120°得到DE。\nAD=DE，∠ADE=120°。"
+            },
+            {
+              "head": "平角定义；等量代换",
+              "content": "H在ED的延长线上，DH=DE。\n∠ADH=180°−∠ADE=60°，且DH=AD。"
+            },
+            {
+              "head": "等腰三角形两底角相等；三角形内角和",
+              "content": "DH=AD，∠ADH=60°。\n△AHD是等边三角形，所以AH=AD，∠HAD=60°。"
+            },
+            {
+              "head": "等边三角形的性质",
+              "content": "△ABC是等边三角形。\nAB=AC，∠BAC=60°。"
+            },
+            {
+              "head": "角的和差",
+              "content": "D在BC上，AD在∠BAC内部；∠HAD=60°，∠BAC=60°。\n∠HAB=∠HAD−∠BAD=60°−∠BAD，∠DAC=∠BAC−∠BAD=60°−∠BAD，所以∠HAB=∠DAC。"
+            },
+            {
+              "head": "SAS",
+              "content": "AH=AD，∠HAB=∠DAC，AB=AC。\n△HAB≌△DAC，所以BH=CD。"
+            },
+            {
+              "head": "等量代换",
+              "content": "BH=2DF，BH=CD。\nCD=2DF。"
+            },
+            {
+              "head": "分类讨论",
+              "content": "当D与C重合时，CD=DF=0，结论仍成立；当D与B重合时，按同一中位线证明仍成立。"
+            },
+            {
+              "head": "定义域与边界检查",
+              "content": "D在BC上，图形取非退化情形；端点D=B、D=C时按长度连续情形检验，结论不变。"
+            }
+          ],
+          "conclusion": "CD=2DF。"
+        }
+      ]
+    }
+  },
+  "review": {
+    "verdict": "pass",
+    "conditions": [
+      {
+        "id": "C6",
+        "verdict": "pass",
+        "evidence": "离线测试夹具，不代表模型或人工数学验收"
+      },
+      {
+        "id": "C7",
+        "verdict": "pass",
+        "evidence": "离线测试夹具，不代表模型或人工数学验收"
+      },
+      {
+        "id": "C8",
+        "verdict": "pass",
+        "evidence": "离线测试夹具，不代表模型或人工数学验收"
+      },
+      {
+        "id": "C9",
+        "verdict": "pass",
+        "evidence": "离线测试夹具，不代表模型或人工数学验收"
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q2",
+        "verdict": "pass",
+        "evidence": "离线测试模拟漏检端点的旧复核，不是正确性事实"
+      }
+    ],
+    "issues": []
+  }
+}

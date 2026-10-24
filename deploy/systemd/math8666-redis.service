@@ -1,0 +1,14 @@
+[Unit]
+Description=Private Redis for Math Agent 8666
+After=network.target
+[Service]
+User=math8666
+Group=math8666
+ExecStart=/usr/bin/redis-server --bind 127.0.0.1 --port 16366 --dir /var/lib/math-agent-8666/redis --appendonly yes --maxmemory 192mb --maxmemory-policy noeviction
+Restart=on-failure
+MemoryMax=384M
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/math-agent-8666/redis
+[Install]
+WantedBy=multi-user.target

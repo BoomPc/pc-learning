@@ -1,0 +1,1982 @@
+{
+  "scope": "real archived low failure; replay tests routing only, no model or math correctness claim",
+  "source": {
+    "topic_family": "rotation_translation",
+    "title": "2024连山区二模第48题：三角形旋转与平移综合",
+    "problem_text": "48.（2024•连山区二模）如图1，在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2，将Rt△ABC绕点A顺时针旋转α（0°<α<180°），点B，C的对应点分别为点B′，C′，连接BB′，CC′.\n（1）如图2，当B′C′恰好经过点C时，求证：∠BB′C=90°；\n（2）如图3，当BB′恰好经过点C时，求BC′的长；\n（3）在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F.连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形.\n①当点D在B′A延长线上时，如图4，求线段AD的长；\n②当点D在射线AB′上时，请直接写出线段AD的长.",
+    "conditions": [
+      {
+        "quote": "在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2",
+        "question_ids": [],
+        "id": "C1",
+        "text": "在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "将Rt△ABC绕点A顺时针旋转α(0°<α<180°)，点B，C的对应点分别为点B′，C′，连接BB′，CC′",
+        "question_ids": [],
+        "id": "C2",
+        "text": "将Rt△ABC绕点A顺时针旋转α（0°<α<180°），点B，C的对应点分别为点B′，C′，连接BB′，CC′",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "如图2，当B′C′恰好经过点C时",
+        "question_ids": [
+          "Q1",
+          "Q3",
+          "Q4"
+        ],
+        "id": "C3",
+        "text": "如图2，B′C′恰好经过点C",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "如图3，当BB′恰好经过点C时",
+        "question_ids": [
+          "Q2"
+        ],
+        "id": "C4",
+        "text": "如图3，BB′恰好经过点C",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F.连接BC′，BE，EC′",
+        "question_ids": [
+          "Q3",
+          "Q4"
+        ],
+        "id": "C5",
+        "text": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F，连接BC′，BE，EC′",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "若△BC′E为以BE为底的等腰三角形",
+        "question_ids": [
+          "Q3",
+          "Q4"
+        ],
+        "id": "C6",
+        "text": "△BC′E为以BE为底的等腰三角形，即BC′=EC′",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "当点D在B′A延长线上时，如图4",
+        "question_ids": [
+          "Q3"
+        ],
+        "id": "C7",
+        "text": "点D在B′A延长线上，如图4",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      },
+      {
+        "quote": "当点D在射线AB′上时",
+        "question_ids": [
+          "Q4"
+        ],
+        "id": "C8",
+        "text": "点D在射线AB′上",
+        "origin": "question_text",
+        "image_ids": [
+          "I1"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "Q1",
+        "text": "如图2，当B′C′恰好经过点C时，求证：∠BB′C=90°"
+      },
+      {
+        "id": "Q2",
+        "text": "如图3，当BB′恰好经过点C时，求BC′的长"
+      },
+      {
+        "id": "Q3",
+        "text": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F，连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形，当点D在B′A延长线上时，如图4，求线段AD的长"
+      },
+      {
+        "id": "Q4",
+        "text": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F，连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形，当点D在射线AB′上时，请直接写出线段AD的长"
+      }
+    ],
+    "reference_summary": "",
+    "uncertainties": []
+  },
+  "candidate": {
+    "solutions": [
+      {
+        "question_id": "Q1",
+        "result": "∠BB′C=90°。",
+        "steps": [
+          {
+            "basis_ids": [],
+            "premise": "在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2。",
+            "rule": "直角三角形两锐角互余，且30°角所对直角边等于斜边的一半",
+            "conclusion": "∠ACB=60°，BC=2AC=4，AB=√(BC²−AC²)=√(16−4)=2√3。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "将Rt△ABC绕点A顺时针旋转α，B，C的对应点为B′，C′。",
+            "rule": "旋转前后对应边、对应角分别相等",
+            "conclusion": "AB′=AB=2√3，AC′=AC=2，∠AB′C′=∠ABC=30°，∠AC′B′=∠ACB=60°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "图2中B′C′经过点C。",
+            "rule": "点C在线段B′C′上，射线B′C与B′C′同向，射线C′C与C′B′同向",
+            "conclusion": "∠AB′C=30°，∠AC′C=60°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "AC=AC′=2，且∠AC′C=60°。",
+            "rule": "等腰三角形两底角相等；三角形内角和为180°",
+            "conclusion": "∠ACC′=∠AC′C=60°，∠CAC′=60°，所以△ACC′是等边三角形，旋转角α=∠CAC′=60°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "AB=AB′，且∠BAB′=α=60°。",
+            "rule": "有一个角是60°的等腰三角形是等边三角形",
+            "conclusion": "△ABB′是等边三角形，所以∠AB′B=60°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "∠AB′B=60°，∠AB′C=30°，且按图2射线B′A在∠BB′C内部。",
+            "rule": "角的和差",
+            "conclusion": "∠BB′C=∠AB′B+∠AB′C=60°+30°=90°。"
+          }
+        ],
+        "cases": [],
+        "domain_and_boundaries": "旋转角满足0°<α<180°；图2中B′C′经过点C这一位置条件把α确定为60°，所得长度均为正值。",
+        "condition_ids": [
+          "C1",
+          "C2",
+          "C3"
+        ]
+      },
+      {
+        "question_id": "Q2",
+        "result": "BC′的长为2√7。",
+        "steps": [
+          {
+            "basis_ids": [],
+            "premise": "图3中BB′经过点C，即B，C，B′共线。",
+            "rule": "同一射线上的角相等",
+            "conclusion": "∠ABB′=∠ABC=30°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "AB=AB′，且∠ABB′=30°。",
+            "rule": "等腰三角形两底角相等；三角形内角和为180°",
+            "conclusion": "∠AB′B=∠ABB′=30°，所以∠BAB′=180°−30°−30°=120°，即α=120°。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "取A为原点，AC所在直线为x轴，AB所在直线为y轴。",
+            "rule": "由∠BAC=90°，AC=2，AB=2√3可设坐标",
+            "conclusion": "A(0,0)，C(2,0)，B(0,2√3)。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "将点B，C绕A顺时针旋转120°。",
+            "rule": "由30°，60°直角三角形的边角关系求旋转后坐标：B′与AC的夹角为30°，在AC下方；C′与AC的夹角为120°",
+            "conclusion": "B′(2√3cos30°，−2√3sin30°)=(3，−√3)，C′(2cos120°，2sin120°)=(−1，−√3)。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "B(0，2√3)，C′(−1，−√3)。",
+            "rule": "两点间距离公式（勾股定理）",
+            "conclusion": "BC′²=(−1−0)²+(−√3−2√3)²=1+27=28，故BC′=2√7。"
+          }
+        ],
+        "cases": [],
+        "domain_and_boundaries": "旋转角满足0°<α<180°；图3中BB′经过点C这一位置条件把α确定为120°，仍在允许范围内。坐标建系不改变长度。",
+        "condition_ids": [
+          "C1",
+          "C2",
+          "C4"
+        ]
+      },
+      {
+        "question_id": "Q3",
+        "result": "AD的长为4√3。",
+        "steps": [
+          {
+            "basis_ids": [],
+            "premise": "由(1)知图2中旋转角α=60°。",
+            "rule": "沿用(2)的建系方法，并按顺时针60°求对应点坐标",
+            "conclusion": "A(0,0)，C(2,0)，B(0,2√3)，B′(3,√3)，C′(1,−√3)。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "B(0，2√3)，C′(1，−√3)。",
+            "rule": "两点间距离公式（勾股定理）",
+            "conclusion": "BC′²=1²+(−3√3)²=28，所以BC′=2√7。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "△BC′E为以BE为底的等腰三角形。",
+            "rule": "等腰三角形两腰相等",
+            "conclusion": "EC′=BC′=2√7。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "点D在B′A的延长线上，设AD=x>0。",
+            "rule": "B′A的长为2√3，横向距离为3，纵向距离为√3；沿B′A方向移动长度x时，横向、纵向距离按比例分配",
+            "conclusion": "D的横坐标为−(3/(2√3))x=−√3x/2，纵坐标为−(√3/(2√3))x=−x/2，即D(−√3x/2，−x/2)。平移把A变到D，把C变到E，所以E(2−√3x/2，−x/2)。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "C′(1，−√3)，E(2−√3x/2，−x/2)。",
+            "rule": "两点间距离公式",
+            "conclusion": "EC′²=(1−√3x/2)²+(√3−x/2)²=x²−2√3x+4。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "EC′=BC′=2√7。",
+            "rule": "代入并解一元二次方程",
+            "conclusion": "x²−2√3x+4=28，即x²−2√3x−24=0，解得x=4√3或x=−2√3。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "x=AD>0，且D在B′A的延长线上，即D在A的与B′相反的一侧。",
+            "rule": "实际距离不能为负，并结合点的位置筛选",
+            "conclusion": "舍去负根x=−2√3，得AD=x=4√3。"
+          }
+        ],
+        "cases": [],
+        "domain_and_boundaries": "设x=AD，x>0。D在B′A的延长线上说明D在A的与B′相反的一侧；方程的另一根−2√3不满足x>0，舍去。答案AD=4√3。",
+        "condition_ids": [
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "C7"
+        ]
+      },
+      {
+        "question_id": "Q4",
+        "result": "AD的长为2√3。",
+        "steps": [
+          {
+            "basis_ids": [],
+            "premise": "由(1)知图2中旋转角α=60°。",
+            "rule": "沿用(2)的建系方法，并按顺时针60°求对应点坐标",
+            "conclusion": "A(0,0)，B(0,2√3)，C(2,0)，B′(3,√3)，C′(1,−√3)，且BC′²=1²+(−3√3)²=28，BC′=2√7。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "点D在射线AB′上，设AD=x>0。",
+            "rule": "AB′的长为2√3，横向距离为3，纵向距离为√3；沿AB′方向移动长度x时，横向、纵向距离按比例分配",
+            "conclusion": "D的横坐标为(3/(2√3))x=√3x/2，纵坐标为(√3/(2√3))x=x/2，即D(√3x/2，x/2)。平移把C变到E，所以E(2+√3x/2，x/2)。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "C′(1，−√3)，E(2+√3x/2，x/2)。",
+            "rule": "两点间距离公式",
+            "conclusion": "EC′²=(1+√3x/2)²+(√3+x/2)²=x²+2√3x+4。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "△BC′E为以BE为底的等腰三角形，所以EC′=BC′=2√7。",
+            "rule": "代入并解一元二次方程",
+            "conclusion": "x²+2√3x+4=28，即x²+2√3x−24=0，解得x=2√3或x=−4√3。"
+          },
+          {
+            "basis_ids": [],
+            "premise": "x=AD>0，且D在射线AB′上。",
+            "rule": "实际距离不能为负，并结合点的位置筛选",
+            "conclusion": "舍去负根x=−4√3，得AD=x=2√3。此时AB′=2√3，所以D与B′重合，仍在射线AB′上。"
+          }
+        ],
+        "cases": [],
+        "domain_and_boundaries": "设x=AD，x>0。D在射线AB′上；方程负根−4√3不满足x>0，舍去。正根2√3对应D与B′重合，位置仍符合“在射线AB′上”，且图形不退化。答案AD=2√3。",
+        "condition_ids": [
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "C8"
+        ]
+      }
+    ],
+    "spec": {
+      "format": "jsxgraph-v1",
+      "title": "2024连山区二模第48题：三角形旋转与平移综合",
+      "problem_text": "48.（2024•连山区二模）如图1，在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2，将Rt△ABC绕点A顺时针旋转α（0°<α<180°），点B，C的对应点分别为点B′，C′，连接BB′，CC′.\n（1）如图2，当B′C′恰好经过点C时，求证：∠BB′C=90°；\n（2）如图3，当BB′恰好经过点C时，求BC′的长；\n（3）在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F.连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形.\n①当点D在B′A延长线上时，如图4，求线段AD的长；\n②当点D在射线AB′上时，请直接写出线段AD的长.",
+      "tabs": [
+        {
+          "tab_title": "Q1",
+          "board": {
+            "viewport": "fit_points",
+            "axis": true,
+            "objects": [
+              {
+                "id": "A",
+                "label": "A",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  "2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  2.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "Bp",
+                "label": "B′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "B",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "Cp",
+                "label": "C′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "C",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "segAB",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "B"
+                ]
+              },
+              {
+                "id": "segBC",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "C"
+                ]
+              },
+              {
+                "id": "segCA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "A"
+                ]
+              },
+              {
+                "id": "segABp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segBpCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Bp",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segCpA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Cp",
+                  "A"
+                ]
+              },
+              {
+                "id": "segBBp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segCCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "Cp"
+                ]
+              }
+            ]
+          },
+          "steps": [
+            {
+              "head": "直角三角形两锐角互余，且30°角所对直角边等于斜边的一半",
+              "content": "在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2。\n∠ACB=60°，BC=2AC=4，AB=√(BC²−AC²)=√(16−4)=2√3。"
+            },
+            {
+              "head": "旋转前后对应边、对应角分别相等",
+              "content": "将Rt△ABC绕点A顺时针旋转α，B，C的对应点为B′，C′。\nAB′=AB=2√3，AC′=AC=2，∠AB′C′=∠ABC=30°，∠AC′B′=∠ACB=60°。"
+            },
+            {
+              "head": "点C在线段B′C′上，射线B′C与B′C′同向，射线C′C与C′B′同向",
+              "content": "图2中B′C′经过点C。\n∠AB′C=30°，∠AC′C=60°。"
+            },
+            {
+              "head": "等腰三角形两底角相等；三角形内角和为180°",
+              "content": "AC=AC′=2，且∠AC′C=60°。\n∠ACC′=∠AC′C=60°，∠CAC′=60°，所以△ACC′是等边三角形，旋转角α=∠CAC′=60°。"
+            },
+            {
+              "head": "有一个角是60°的等腰三角形是等边三角形",
+              "content": "AB=AB′，且∠BAB′=α=60°。\n△ABB′是等边三角形，所以∠AB′B=60°。"
+            },
+            {
+              "head": "角的和差",
+              "content": "∠AB′B=60°，∠AB′C=30°，且按图2射线B′A在∠BB′C内部。\n∠BB′C=∠AB′B+∠AB′C=60°+30°=90°。"
+            },
+            {
+              "head": "定义域与边界检查",
+              "content": "旋转角满足0°<α<180°；图2中B′C′经过点C这一位置条件把α确定为60°，所得长度均为正值。"
+            }
+          ],
+          "conclusion": "∠BB′C=90°。"
+        },
+        {
+          "tab_title": "Q2",
+          "board": {
+            "viewport": "fit_points",
+            "axis": true,
+            "objects": [
+              {
+                "id": "A",
+                "label": "A",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  "2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  2.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "Bp",
+                "label": "B′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "B",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 120.0
+              },
+              {
+                "id": "Cp",
+                "label": "C′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "C",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 120.0
+              },
+              {
+                "id": "segAB",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "B"
+                ]
+              },
+              {
+                "id": "segBC",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "C"
+                ]
+              },
+              {
+                "id": "segCA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "A"
+                ]
+              },
+              {
+                "id": "segABp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segBpCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Bp",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segCpA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Cp",
+                  "A"
+                ]
+              },
+              {
+                "id": "segBBp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segCCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segBCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "Cp"
+                ]
+              }
+            ]
+          },
+          "steps": [
+            {
+              "head": "同一射线上的角相等",
+              "content": "图3中BB′经过点C，即B，C，B′共线。\n∠ABB′=∠ABC=30°。"
+            },
+            {
+              "head": "等腰三角形两底角相等；三角形内角和为180°",
+              "content": "AB=AB′，且∠ABB′=30°。\n∠AB′B=∠ABB′=30°，所以∠BAB′=180°−30°−30°=120°，即α=120°。"
+            },
+            {
+              "head": "由∠BAC=90°，AC=2，AB=2√3可设坐标",
+              "content": "取A为原点，AC所在直线为x轴，AB所在直线为y轴。\nA(0,0)，C(2,0)，B(0,2√3)。"
+            },
+            {
+              "head": "由30°，60°直角三角形的边角关系求旋转后坐标：B′与AC的夹角为30°，在AC下方；C′与AC的夹角为120°",
+              "content": "将点B，C绕A顺时针旋转120°。\nB′(2√3cos30°，−2√3sin30°)=(3，−√3)，C′(2cos120°，2sin120°)=(−1，−√3)。"
+            },
+            {
+              "head": "两点间距离公式（勾股定理）",
+              "content": "B(0，2√3)，C′(−1，−√3)。\nBC′²=(−1−0)²+(−√3−2√3)²=1+27=28，故BC′=2√7。"
+            },
+            {
+              "head": "定义域与边界检查",
+              "content": "旋转角满足0°<α<180°；图3中BB′经过点C这一位置条件把α确定为120°，仍在允许范围内。坐标建系不改变长度。"
+            }
+          ],
+          "conclusion": "BC′的长为2√7。"
+        },
+        {
+          "tab_title": "Q3",
+          "board": {
+            "viewport": "fit_points",
+            "axis": true,
+            "objects": [
+              {
+                "id": "A",
+                "label": "A",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  "2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  2.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "Bp",
+                "label": "B′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "B",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "Cp",
+                "label": "C′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "C",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "D",
+                "label": "D",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "A"
+                ],
+                "vector": [
+                  "-6",
+                  "-2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "E",
+                "label": "E",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "C"
+                ],
+                "vector": [
+                  "-6",
+                  "-2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "F",
+                "label": "F",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "Cp"
+                ],
+                "vector": [
+                  "-6",
+                  "-2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "segAB",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "B"
+                ]
+              },
+              {
+                "id": "segBC",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "C"
+                ]
+              },
+              {
+                "id": "segCA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "A"
+                ]
+              },
+              {
+                "id": "segABp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segBpCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Bp",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segCpA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Cp",
+                  "A"
+                ]
+              },
+              {
+                "id": "segCCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segDE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "D",
+                  "E"
+                ]
+              },
+              {
+                "id": "segEF",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "E",
+                  "F"
+                ]
+              },
+              {
+                "id": "segFD",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "F",
+                  "D"
+                ]
+              },
+              {
+                "id": "segAD",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": true,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "D"
+                ]
+              },
+              {
+                "id": "segBCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segBE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "E"
+                ]
+              },
+              {
+                "id": "segECp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "E",
+                  "Cp"
+                ]
+              }
+            ]
+          },
+          "steps": [
+            {
+              "head": "沿用(2)的建系方法，并按顺时针60°求对应点坐标",
+              "content": "由(1)知图2中旋转角α=60°。\nA(0,0)，C(2,0)，B(0,2√3)，B′(3,√3)，C′(1,−√3)。"
+            },
+            {
+              "head": "两点间距离公式（勾股定理）",
+              "content": "B(0，2√3)，C′(1，−√3)。\nBC′²=1²+(−3√3)²=28，所以BC′=2√7。"
+            },
+            {
+              "head": "等腰三角形两腰相等",
+              "content": "△BC′E为以BE为底的等腰三角形。\nEC′=BC′=2√7。"
+            },
+            {
+              "head": "B′A的长为2√3，横向距离为3，纵向距离为√3；沿B′A方向移动长度x时，横向、纵向距离按比例分配",
+              "content": "点D在B′A的延长线上，设AD=x>0。\nD的横坐标为−(3/(2√3))x=−√3x/2，纵坐标为−(√3/(2√3))x=−x/2，即D(−√3x/2，−x/2)。平移把A变到D，把C变到E，所以E(2−√3x/2，−x/2)。"
+            },
+            {
+              "head": "两点间距离公式",
+              "content": "C′(1，−√3)，E(2−√3x/2，−x/2)。\nEC′²=(1−√3x/2)²+(√3−x/2)²=x²−2√3x+4。"
+            },
+            {
+              "head": "代入并解一元二次方程",
+              "content": "EC′=BC′=2√7。\nx²−2√3x+4=28，即x²−2√3x−24=0，解得x=4√3或x=−2√3。"
+            },
+            {
+              "head": "实际距离不能为负，并结合点的位置筛选",
+              "content": "x=AD>0，且D在B′A的延长线上，即D在A的与B′相反的一侧。\n舍去负根x=−2√3，得AD=x=4√3。"
+            },
+            {
+              "head": "定义域与边界检查",
+              "content": "设x=AD，x>0。D在B′A的延长线上说明D在A的与B′相反的一侧；方程的另一根−2√3不满足x>0，舍去。答案AD=4√3。"
+            }
+          ],
+          "conclusion": "AD的长为4√3。"
+        },
+        {
+          "tab_title": "Q4",
+          "board": {
+            "viewport": "fit_points",
+            "axis": true,
+            "objects": [
+              {
+                "id": "A",
+                "label": "A",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  0.0,
+                  "2*sqrt(3)"
+                ]
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "point",
+                "coords": [
+                  2.0,
+                  0.0
+                ]
+              },
+              {
+                "id": "Bp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "B",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "Cp",
+                "label": "C′",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "rotation",
+                "parents": [
+                  "C",
+                  "A"
+                ],
+                "direction": "clockwise",
+                "degrees": 60.0
+              },
+              {
+                "id": "D",
+                "label": "B′(D)",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "A"
+                ],
+                "vector": [
+                  "3",
+                  "sqrt(3)"
+                ]
+              },
+              {
+                "id": "E",
+                "label": "E",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "C"
+                ],
+                "vector": [
+                  "3",
+                  "sqrt(3)"
+                ]
+              },
+              {
+                "id": "F",
+                "label": "F",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "translation",
+                "parents": [
+                  "Cp"
+                ],
+                "vector": [
+                  "3",
+                  "sqrt(3)"
+                ]
+              },
+              {
+                "id": "segAB",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "B"
+                ]
+              },
+              {
+                "id": "segBC",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "C"
+                ]
+              },
+              {
+                "id": "segCA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "A"
+                ]
+              },
+              {
+                "id": "segABp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "A",
+                  "Bp"
+                ]
+              },
+              {
+                "id": "segBpCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Bp",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segCpA",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "Cp",
+                  "A"
+                ]
+              },
+              {
+                "id": "segCCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "C",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segDE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "D",
+                  "E"
+                ]
+              },
+              {
+                "id": "segEF",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "E",
+                  "F"
+                ]
+              },
+              {
+                "id": "segFD",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "F",
+                  "D"
+                ]
+              },
+              {
+                "id": "segBCp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "Cp"
+                ]
+              },
+              {
+                "id": "segBE",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "B",
+                  "E"
+                ]
+              },
+              {
+                "id": "segECp",
+                "label": "",
+                "color": "#65c7ff",
+                "visible": true,
+                "dashed": false,
+                "kind": "segment",
+                "parents": [
+                  "E",
+                  "Cp"
+                ]
+              }
+            ]
+          },
+          "steps": [
+            {
+              "head": "沿用(2)的建系方法，并按顺时针60°求对应点坐标",
+              "content": "由(1)知图2中旋转角α=60°。\nA(0,0)，B(0,2√3)，C(2,0)，B′(3,√3)，C′(1,−√3)，且BC′²=1²+(−3√3)²=28，BC′=2√7。"
+            },
+            {
+              "head": "AB′的长为2√3，横向距离为3，纵向距离为√3；沿AB′方向移动长度x时，横向、纵向距离按比例分配",
+              "content": "点D在射线AB′上，设AD=x>0。\nD的横坐标为(3/(2√3))x=√3x/2，纵坐标为(√3/(2√3))x=x/2，即D(√3x/2，x/2)。平移把C变到E，所以E(2+√3x/2，x/2)。"
+            },
+            {
+              "head": "两点间距离公式",
+              "content": "C′(1，−√3)，E(2+√3x/2，x/2)。\nEC′²=(1+√3x/2)²+(√3+x/2)²=x²+2√3x+4。"
+            },
+            {
+              "head": "代入并解一元二次方程",
+              "content": "△BC′E为以BE为底的等腰三角形，所以EC′=BC′=2√7。\nx²+2√3x+4=28，即x²+2√3x−24=0，解得x=2√3或x=−4√3。"
+            },
+            {
+              "head": "实际距离不能为负，并结合点的位置筛选",
+              "content": "x=AD>0，且D在射线AB′上。\n舍去负根x=−4√3，得AD=x=2√3。此时AB′=2√3，所以D与B′重合，仍在射线AB′上。"
+            },
+            {
+              "head": "定义域与边界检查",
+              "content": "设x=AD，x>0。D在射线AB′上；方程负根−4√3不满足x>0，舍去。正根2√3对应D与B′重合，位置仍符合“在射线AB′上”，且图形不退化。答案AD=2√3。"
+            }
+          ],
+          "conclusion": "AD的长为2√3。"
+        }
+      ]
+    }
+  },
+  "review": {
+    "verdict": "revise",
+    "conditions": {
+      "C1": {
+        "verdict": "pass",
+        "evidence": "题目文字与图1一致：∠BAC=90°，∠ABC=30°，AC=2。由30°角所对直角边为斜边一半得BC=4，勾股得AB=2√3；画板取A(0,0)、C(2,0)、B(0,2√3)，实测AB²=12、AC=2、BC²=16，与条件相符，∠A确为直角。"
+      },
+      "C2": {
+        "verdict": "pass",
+        "evidence": "四个小问的画板都把B′、C′建成rotation对象（parents为B、A与C、A，顺时针），Q1/Q3/Q4用60°，Q2用120°，均满足0°<α<180°；连接BB′、CC′体现在segBBp、segCCp上（Q1、Q2、Q3均有，Q4只画CC′，因该问不涉及BB′，不影响题意）。"
+      },
+      "C3": {
+        "verdict": "pass",
+        "evidence": "tab0/tab2实测B′、C′、C共线，且on_segment(B′→C′,C)成立（B′(3,√3)、C′(1,−√3)、C(2,0)，C为B′C′中点），符合“B′C′恰好经过点C”。故∠AB′C=∠AB′C′=30°、∠AC′C=∠AC′B′=60°的取角依据成立。"
+      },
+      "C4": {
+        "verdict": "pass",
+        "evidence": "tab1实测B(0,2√3)、C(2,0)、B′(3,−√3)共线，且C在线段BB′内部（on_segment成立），故射线BC与射线BB′同向，∠ABB′=∠ABC=30°，进而α=∠BAB′=120°。"
+      },
+      "C5": {
+        "verdict": "pass",
+        "evidence": "tab2把D、E、F均建成translation（parents A、C、C′），向量(−6,−2√3)=2·(−3,−√3)与B′→A同向，|AD|=4√3；tab3用向量(3,√3)=AB′，|AD|=2√3。两图都画出了BC′、BE、EC′及△DEF。平移方向与C7、C8一致。"
+      },
+      "C6": {
+        "verdict": "pass",
+        "evidence": "tab2中BC′²=28、EC′²=28（equal_length(B,C′,E,C′)=true）；tab3中B(0,2√3)、C′(1,−√3)、E(5,√3)，BC′²=28、EC′²=16+12=28，等长成立，满足“以BE为底的等腰三角形”BC′=EC′。该值来自答案AD，属于验证而非题设，已仅在本问图形核对中使用。"
+      },
+      "C7": {
+        "verdict": "pass",
+        "evidence": "tab2中B′(3,√3)、A(0,0)、D(−6,−2√3)共线，且on_segment(B′,D,A)为真，即A在B′与D之间，D位于B′A延长线上，与图4位置一致。"
+      },
+      "C8": {
+        "verdict": "pass",
+        "evidence": "tab3中A(0,0)、B′(3,√3)、D(3,√3)共线，D恰与B′重合，落在射线AB′上（端点允许），与答案AD=AB′=2√3自洽，也与参考答案②图“B′(D)”标注一致。"
+      }
+    },
+    "questions": {
+      "Q1": {
+        "verdict": "pass",
+        "evidence": "推证链条核对无误：∠ACB=60°、BC=4、AB=2√3（C1）；旋转得AB′=AB、AC′=AC=2、∠AB′C′=∠ABC=30°、∠AC′B′=∠ACB=60°（C2）；C在B′C′上得∠AB′C=30°、∠AC′C=60°（已由tab0的共线与on_segment证实）；AC=AC′得∠ACC′=∠AC′C=60°，故△ACC′等边，α=60°；△ABB′有一角60°且AB=AB′，为等边三角形，∠AB′B=60°；终得∠BB′C=60°+30°=90°。分解成立，因为tab0实测B′A在∠BB′C内部（B′B方向角150°、B′A为210°、B′C为240°）。tab0中perpendicular(BB′,B′C)实测为真。"
+      },
+      "Q2": {
+        "verdict": "issue",
+        "evidence": "答案2√7正确：由C4得α=120°；tab1坐标A(0,0)、B(0,2√3)、C(2,0)、B′(3,−√3)、C′(−1,−√3)，BC′²=(−1)²+(−√3−2√3)²=28（与工具distance_squared(B,C′)=28一致），BC′=2√7，与参考答案一致。但解题过程中“C′(2cos120°，2sin120°)=(−1，−√3)”这一等式本身写错：2cos120°=−1正确，而2sin120°=√3≠−√3。原因是顺时针旋转120°应对应角−120°（2sin(−120°)=−√3）。此外初中未定义钝角三角函数，宜改为由∠CAC′=120°、C′在射线AC下方且与AC反向延长线成60°得C′=(−2cos60°，−2sin60°)=(−1，−√3)，只用锐角三角函数。"
+      },
+      "Q3": {
+        "verdict": "pass",
+        "evidence": "α=60°来自第(1)问已证（△ACC′等边），本问图2基础条件C3在tab2中实测B′C′过C；坐标A(0,0)、C(2,0)、B(0,2√3)、B′(3,√3)、C′(1,−√3)与工具输出一致，BC′²=28。设x=AD>0，D在B′A延长线上（已由tab2共线与on_segment核实），平移位移向量与(−3,−√3)同向，D(−√3x/2,−x/2)、E(2−√3x/2,−x/2)，EC′²=(1−(2−√3x/2))²+(−√3+x/2)²=x²−2√3x+4；令其为28得x²−2√3x−24=0，根为4√3与−2√3（algebra_batch已给出两真实根），舍负根得AD=4√3，与参考答案①一致。变量x始终是长度且为正，无正负混用。"
+      },
+      "Q4": {
+        "verdict": "pass",
+        "evidence": "仍以图2（α=60°）建系，D在射线AB′上，位移向量与(3,√3)同向；设x=AD>0，D(√3x/2,x/2)、E(2+√3x/2,x/2)，EC′²=(1−(2+√3x/2))²+(−√3−x/2)²=x²+2√3x+4；令其=28得x²+2√3x−24=0，根2√3与−4√3，舍负根，AD=2√3，与参考答案②一致。此时x=AB′=2√3，D与B′重合；tab3实测collinear(A,B′,D)、equal_length(BC′,EC′)均成立，端点位置未退化（B(0,2√3)、C′(1,−√3)、E(5,√3)三点构成非退化三角形），符合“射线AB′上”含端点的取值。"
+      }
+    },
+    "issues": [
+      {
+        "stage": "math",
+        "target": "Q2 建系求C′坐标的一步",
+        "detail": "解题过程写“C′(2cos120°，2sin120°)=(−1，−√3)”，其中2sin120°=√3，与所写纵坐标−√3不符，该等式不成立；顺时针旋转120°应对应角−120°。虽最终BC′=2√7正确，但式子的符号错误会误导学生。另外初中阶段未学钝角的三角函数，建议改写为：由旋转120°知∠CAC′=120°，射线AC′在AC下方、与AC反向延长线夹60°，故C′=(−2cos60°，−2sin60°)=(−1，−√3)，只用锐角三角函数与坐标变化说明。"
+      }
+    ]
+  },
+  "inspections": [
+    {
+      "seconds": 185.082,
+      "kind": "tool",
+      "stage": "review",
+      "name": "inspect_scene",
+      "arguments": "{\"probes\": [{\"tab\": 0, \"checks\": [{\"relation\": \"collinear\", \"points\": [\"Bp\", \"Cp\", \"C\"], \"basis_ids\": [\"C3\"], \"rationale\": \"图2条件B′C′恰好经过点C，故B′、C、C′共线\", \"expected\": true}, {\"relation\": \"on_segment\", \"points\": [\"Bp\", \"Cp\", \"C\"], \"basis_ids\": [\"C3\"], \"rationale\": \"B′C′经过C且图2中C在B′与C′之间，用于把∠AB′C=∠AB′C′=30°、∠AC′C=∠AC′B′=60°\", \"expected\": true}, {\"relation\": \"perpendicular\", \"points\": [\"B\", \"Bp\", \"Bp\", \"C\"], \"basis_ids\": [\"Q1:S6\", \"C3\"], \"rationale\": \"第(1)问要证的结论∠BB′C=90°，即BB′⊥B′C\", \"expected\": true}]}, {\"tab\": 1, \"checks\": [{\"relation\": \"collinear\", \"points\": [\"B\", \"C\", \"Bp\"], \"basis_ids\": [\"C4\"], \"rationale\": \"图3中BB′经过点C\", \"expected\": true}, {\"relation\": \"on_segment\", \"points\": [\"B\", \"Bp\", \"C\"], \"basis_ids\": [\"C4\"], \"rationale\": \"C在B与B′之间，射线BC与射线BB′同向，才能得∠ABB′=∠ABC=30°\", \"expected\": true}]}, {\"tab\": 2, \"checks\": [{\"relation\": \"collinear\", \"points\": [\"Bp\", \"A\", \"D\"], \"basis_ids\": [\"C7\", \"C5\"], \"rationale\": \"D在B′A延长线上，沿B′A方向平移，故B′、A、D共线\", \"expected\": true}, {\"relation\": \"on_segment\", \"points\": [\"Bp\", \"D\", \"A\"], \"basis_ids\": [\"C7\"], \"rationale\": \"B′A延长线上表示A在B′与D之间\", \"expected\": true}, {\"relation\": \"equal_length\", \"points\": [\"B\", \"Cp\", \"E\", \"Cp\"], \"basis_ids\": [\"C6\"], \"rationale\": \"以BE为底的等腰三角形，两腰BC′=EC′，AD=4√3时应成立\", \"expected\": true}, {\"relation\": \"collinear\", \"points\": [\"Bp\", \"Cp\", \"C\"], \"basis_ids\": [\"C3\"], \"rationale\": \"第(3)问以图2为基础，B′C′经过C\", \"expected\": true}]}, {\"tab\": 3, \"checks\": [{\"relation\": \"collinear\", \"points\": [\"A\", \"Bp\", \"D\"], \"basis_ids\": [\"C8\"], \"rationale\": \"D在射线AB′上，A、B′、D共线\", \"expected\": true}, {\"relation\": \"on_segment\", \"points\": [\"A\", \"D\", \"Bp\"], \"basis_ids\": [\"C8\", \"Q4:S6\"], \"rationale\": \"答案AD=2√3=AB′，D与B′重合，故B′落在线段AD上\", \"expected\": true}, {\"relation\": \"equal_length\", \"points\": [\"B\", \"Cp\", \"E\", \"Cp\"], \"basis_ids\": [\"C6\"], \"rationale\": \"等腰条件BC′=EC′在图4位置亦应成立\", \"expected\": true}]}]}",
+      "result": {
+        "ok": false,
+        "error": "断言依据必须是条件C编号或推导Qn:Sm，不能把待证目标Q编号当已知",
+        "execution_failure": {
+          "kind": "basis_validation",
+          "spec_sha256": "058eb1a27dd9adabc711cc09ca0e255b31eb93e40b618883830f06e405adf32f",
+          "targets": [
+            {
+              "tab": 3,
+              "parameter": null,
+              "relation": "on_segment",
+              "points": [
+                "A",
+                "D",
+                "Bp"
+              ],
+              "has_expected": true,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seconds": 192.575,
+      "kind": "tool",
+      "stage": "review",
+      "name": "inspect_scene",
+      "arguments": "{\"probes\": [{\"checks\": [{\"basis_ids\": [\"C3\"], \"expected\": true, \"points\": [\"Bp\", \"Cp\", \"C\"], \"rationale\": \"图2条件B′C′恰好经过点C，故共线\", \"relation\": \"collinear\"}, {\"basis_ids\": [\"C3\"], \"expected\": true, \"points\": [\"Bp\", \"Cp\", \"C\"], \"rationale\": \"C在B′与C′之间，用于∠AB′C=30°、∠AC′C=60°\", \"relation\": \"on_segment\"}, {\"basis_ids\": [\"C3\", \"C1\"], \"expected\": true, \"points\": [\"B\", \"Bp\", \"Bp\", \"C\"], \"rationale\": \"第(1)问目标∠BB′C=90°，即BB′⊥B′C，属待核结论\", \"relation\": \"perpendicular\"}], \"tab\": 0}, {\"checks\": [{\"basis_ids\": [\"C4\"], \"expected\": true, \"points\": [\"B\", \"C\", \"Bp\"], \"rationale\": \"图3中BB′经过点C\", \"relation\": \"collinear\"}, {\"basis_ids\": [\"C4\"], \"expected\": true, \"points\": [\"B\", \"Bp\", \"C\"], \"rationale\": \"C在B与B′之间，射线BC与BB′同向\", \"relation\": \"on_segment\"}], \"tab\": 1}, {\"checks\": [{\"basis_ids\": [\"C7\", \"C5\"], \"expected\": true, \"points\": [\"Bp\", \"A\", \"D\"], \"rationale\": \"D在B′A延长线上，且沿B′A方向平移\", \"relation\": \"collinear\"}, {\"basis_ids\": [\"C7\"], \"expected\": true, \"points\": [\"Bp\", \"D\", \"A\"], \"rationale\": \"B′A延长线表示A在B′与D之间\", \"relation\": \"on_segment\"}, {\"basis_ids\": [\"C6\", \"C3\"], \"expected\": true, \"points\": [\"B\", \"Cp\", \"E\", \"Cp\"], \"rationale\": \"以BE为底的等腰三角形 BC′=EC′\", \"relation\": \"equal_length\"}, {\"basis_ids\": [\"C3\"], \"expected\": true, \"points\": [\"Bp\", \"Cp\", \"C\"], \"rationale\": \"第(3)问以图2为基础，B′C′过C\", \"relation\": \"collinear\"}], \"tab\": 2}, {\"checks\": [{\"basis_ids\": [\"C8\"], \"expected\": true, \"points\": [\"A\", \"Bp\", \"D\"], \"rationale\": \"D在射线AB′上，A、B′、D共线\", \"relation\": \"collinear\"}, {\"points\": [\"A\", \"D\", \"Bp\"], \"rationale\": \"查询D与B′是否重合（AD=AB′=2√3时为是）\", \"relation\": \"on_segment\"}, {\"basis_ids\": [\"C6\"], \"expected\": true, \"points\": [\"B\", \"Cp\", \"E\", \"Cp\"], \"rationale\": \"等腰条件BC′=EC′\", \"relation\": \"equal_length\"}], \"tab\": 3}]}",
+      "result": {
+        "ok": true,
+        "assertions_pass": true,
+        "engine": "JSXGraph",
+        "spec_sha256": "058eb1a27dd9adabc711cc09ca0e255b31eb93e40b618883830f06e405adf32f",
+        "probes": [
+          {
+            "tab": 0,
+            "parameter": null,
+            "in_domain": true,
+            "checks": [
+              {
+                "relation": "collinear",
+                "points": [
+                  "Bp",
+                  "Cp",
+                  "C"
+                ],
+                "pass": true,
+                "observed": {
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "Cp": [
+                    1.0000000000000002,
+                    -1.7320508075688772
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C3"
+                ],
+                "rationale": "图2条件B′C′恰好经过点C，故共线",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "on_segment",
+                "points": [
+                  "Bp",
+                  "Cp",
+                  "C"
+                ],
+                "pass": true,
+                "observed": {
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "Cp": [
+                    1.0000000000000002,
+                    -1.7320508075688772
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C3"
+                ],
+                "rationale": "C在B′与C′之间，用于∠AB′C=30°、∠AC′C=60°",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "perpendicular",
+                "points": [
+                  "B",
+                  "Bp",
+                  "Bp",
+                  "C"
+                ],
+                "pass": true,
+                "observed": {
+                  "B": [
+                    0,
+                    3.4641016151377544
+                  ],
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C3",
+                  "C1"
+                ],
+                "rationale": "第(1)问目标∠BB′C=90°，即BB′⊥B′C，属待核结论",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              }
+            ],
+            "points": {
+              "A": [
+                0,
+                0
+              ],
+              "B": [
+                0,
+                3.4641016151377544
+              ],
+              "C": [
+                2,
+                0
+              ],
+              "Bp": [
+                2.9999999999999996,
+                1.7320508075688776
+              ],
+              "Cp": [
+                1.0000000000000002,
+                -1.7320508075688772
+              ]
+            },
+            "points_truncated": false
+          },
+          {
+            "tab": 1,
+            "parameter": null,
+            "in_domain": true,
+            "checks": [
+              {
+                "relation": "collinear",
+                "points": [
+                  "B",
+                  "C",
+                  "Bp"
+                ],
+                "pass": true,
+                "observed": {
+                  "B": [
+                    0,
+                    3.4641016151377544
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ],
+                  "Bp": [
+                    3,
+                    -1.7320508075688765
+                  ]
+                },
+                "basis_ids": [
+                  "C4"
+                ],
+                "rationale": "图3中BB′经过点C",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "on_segment",
+                "points": [
+                  "B",
+                  "Bp",
+                  "C"
+                ],
+                "pass": true,
+                "observed": {
+                  "B": [
+                    0,
+                    3.4641016151377544
+                  ],
+                  "Bp": [
+                    3,
+                    -1.7320508075688765
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C4"
+                ],
+                "rationale": "C在B与B′之间，射线BC与BB′同向",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              }
+            ],
+            "points": {
+              "A": [
+                0,
+                0
+              ],
+              "B": [
+                0,
+                3.4641016151377544
+              ],
+              "C": [
+                2,
+                0
+              ],
+              "Bp": [
+                3,
+                -1.7320508075688765
+              ],
+              "Cp": [
+                -0.9999999999999996,
+                -1.7320508075688774
+              ]
+            },
+            "points_truncated": false
+          },
+          {
+            "tab": 2,
+            "parameter": null,
+            "in_domain": true,
+            "checks": [
+              {
+                "relation": "collinear",
+                "points": [
+                  "Bp",
+                  "A",
+                  "D"
+                ],
+                "pass": true,
+                "observed": {
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "A": [
+                    0,
+                    0
+                  ],
+                  "D": [
+                    -6,
+                    -3.4641016151377544
+                  ]
+                },
+                "basis_ids": [
+                  "C7",
+                  "C5"
+                ],
+                "rationale": "D在B′A延长线上，且沿B′A方向平移",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "on_segment",
+                "points": [
+                  "Bp",
+                  "D",
+                  "A"
+                ],
+                "pass": true,
+                "observed": {
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "D": [
+                    -6,
+                    -3.4641016151377544
+                  ],
+                  "A": [
+                    0,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C7"
+                ],
+                "rationale": "B′A延长线表示A在B′与D之间",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "equal_length",
+                "points": [
+                  "B",
+                  "Cp",
+                  "E",
+                  "Cp"
+                ],
+                "pass": true,
+                "observed": {
+                  "B": [
+                    0,
+                    3.4641016151377544
+                  ],
+                  "Cp": [
+                    1.0000000000000002,
+                    -1.7320508075688772
+                  ],
+                  "E": [
+                    -4,
+                    -3.4641016151377544
+                  ]
+                },
+                "basis_ids": [
+                  "C6",
+                  "C3"
+                ],
+                "rationale": "以BE为底的等腰三角形 BC′=EC′",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "collinear",
+                "points": [
+                  "Bp",
+                  "Cp",
+                  "C"
+                ],
+                "pass": true,
+                "observed": {
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "Cp": [
+                    1.0000000000000002,
+                    -1.7320508075688772
+                  ],
+                  "C": [
+                    2,
+                    0
+                  ]
+                },
+                "basis_ids": [
+                  "C3"
+                ],
+                "rationale": "第(3)问以图2为基础，B′C′过C",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              }
+            ],
+            "points": {
+              "A": [
+                0,
+                0
+              ],
+              "B": [
+                0,
+                3.4641016151377544
+              ],
+              "C": [
+                2,
+                0
+              ],
+              "Bp": [
+                2.9999999999999996,
+                1.7320508075688776
+              ],
+              "Cp": [
+                1.0000000000000002,
+                -1.7320508075688772
+              ],
+              "D": [
+                -6,
+                -3.4641016151377544
+              ],
+              "E": [
+                -4,
+                -3.4641016151377544
+              ],
+              "F": [
+                -5,
+                -5.196152422706632
+              ]
+            },
+            "points_truncated": false
+          },
+          {
+            "tab": 3,
+            "parameter": null,
+            "in_domain": true,
+            "checks": [
+              {
+                "relation": "collinear",
+                "points": [
+                  "A",
+                  "Bp",
+                  "D"
+                ],
+                "pass": true,
+                "observed": {
+                  "A": [
+                    0,
+                    0
+                  ],
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ],
+                  "D": [
+                    3,
+                    1.7320508075688772
+                  ]
+                },
+                "basis_ids": [
+                  "C8"
+                ],
+                "rationale": "D在射线AB′上，A、B′、D共线",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              },
+              {
+                "relation": "on_segment",
+                "points": [
+                  "A",
+                  "D",
+                  "Bp"
+                ],
+                "pass": true,
+                "observed": {
+                  "A": [
+                    0,
+                    0
+                  ],
+                  "D": [
+                    3,
+                    1.7320508075688772
+                  ],
+                  "Bp": [
+                    2.9999999999999996,
+                    1.7320508075688776
+                  ]
+                },
+                "basis_ids": [],
+                "rationale": "查询D与B′是否重合（AD=AB′=2√3时为是）",
+                "holds": true,
+                "expected": null,
+                "matches_expected": null
+              },
+              {
+                "relation": "equal_length",
+                "points": [
+                  "B",
+                  "Cp",
+                  "E",
+                  "Cp"
+                ],
+                "pass": true,
+                "observed": {
+                  "B": [
+                    0,
+                    3.4641016151377544
+                  ],
+                  "Cp": [
+                    1.0000000000000002,
+                    -1.7320508075688772
+                  ],
+                  "E": [
+                    5,
+                    1.7320508075688772
+                  ]
+                },
+                "basis_ids": [
+                  "C6"
+                ],
+                "rationale": "等腰条件BC′=EC′",
+                "holds": true,
+                "expected": true,
+                "matches_expected": true
+              }
+            ],
+            "points": {
+              "A": [
+                0,
+                0
+              ],
+              "B": [
+                0,
+                3.4641016151377544
+              ],
+              "C": [
+                2,
+                0
+              ],
+              "Bp": [
+                2.9999999999999996,
+                1.7320508075688776
+              ],
+              "Cp": [
+                1.0000000000000002,
+                -1.7320508075688772
+              ],
+              "D": [
+                3,
+                1.7320508075688772
+              ],
+              "E": [
+                5,
+                1.7320508075688772
+              ],
+              "F": [
+                4,
+                0
+              ]
+            },
+            "points_truncated": false
+          }
+        ],
+        "browser_errors": [],
+        "numeric_tolerance": 1e-05,
+        "scope": "指定参数处真实浏览器对象；模型选择的断言不等于原题全部条件。"
+      }
+    }
+  ]
+}

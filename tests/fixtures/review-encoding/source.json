@@ -1,0 +1,131 @@
+{
+  "topic_family": "unknown",
+  "title": "旋转、平移综合：Rt△ABC绕点A旋转及△ACC′平移（第48题）",
+  "problem_text": "48.（2024•连山区二模）如图1，在Rt△ABC中，∠BAC=90°，∠ABC=30°，AC=2，将Rt△ABC绕点A顺时针旋转α(0°<α<180°)，点B，C的对应点分别为点B′，C′，连接BB′，CC′。\n（1）如图2，当B′C′恰好经过点C时，求证：∠BB′C=90°；\n（2）如图3，当BB′恰好经过点C时，求BC′的长；\n（3）在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F。连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形。\n①当点D在B′A延长线上时，如图4，求线段AD的长；\n②当点D在射线AB′上时，请直接写出线段AD的长。",
+  "conditions": [
+    {
+      "quote": "在Rt△ABC中，∠BAC=90°",
+      "question_ids": [],
+      "id": "C1",
+      "text": "在Rt△ABC中，∠BAC=90°。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "∠ABC=30°",
+      "question_ids": [],
+      "id": "C2",
+      "text": "∠ABC=30°。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "AC=2",
+      "question_ids": [],
+      "id": "C3",
+      "text": "AC=2。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "将Rt△ABC绕点A顺时针旋转α(0°<α<180°)",
+      "question_ids": [],
+      "id": "C4",
+      "text": "将Rt△ABC绕点A顺时针旋转α(0°<α<180°)，点B，C的对应点分别为点B′，C′。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "连接BB′，CC′",
+      "question_ids": [],
+      "id": "C5",
+      "text": "连接BB′，CC′。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "如图2，当B′C′恰好经过点C时",
+      "question_ids": [
+        "Q1",
+        "Q3",
+        "Q4"
+      ],
+      "id": "C6",
+      "text": "如图2，B′C′恰好经过点C。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "如图3，当BB′恰好经过点C时",
+      "question_ids": [
+        "Q2"
+      ],
+      "id": "C7",
+      "text": "如图3，BB′恰好经过点C。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F",
+      "question_ids": [
+        "Q3",
+        "Q4"
+      ],
+      "id": "C8",
+      "text": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "若△BC′E为以BE为底的等腰三角形",
+      "question_ids": [
+        "Q3",
+        "Q4"
+      ],
+      "id": "C9",
+      "text": "连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "当点D在B′A延长线上时，如图4",
+      "question_ids": [
+        "Q3"
+      ],
+      "id": "C10",
+      "text": "当点D在B′A延长线上时，如图4。",
+      "origin": "question_text",
+      "image_ids": []
+    },
+    {
+      "quote": "当点D在射线AB′上时",
+      "question_ids": [
+        "Q4"
+      ],
+      "id": "C11",
+      "text": "当点D在射线AB′上时。",
+      "origin": "question_text",
+      "image_ids": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "如图2，当B′C′恰好经过点C时，求证：∠BB′C=90°。"
+    },
+    {
+      "id": "Q2",
+      "text": "如图3，当BB′恰好经过点C时，求BC′的长。"
+    },
+    {
+      "id": "Q3",
+      "text": "在图2的基础上，将△ACC′沿直线B′A的方向平移，点A，C，C′的对应点分别为D，E，F，连接BC′，BE，EC′，若△BC′E为以BE为底的等腰三角形。①当点D在B′A延长线上时，如图4，求线段AD的长。"
+    },
+    {
+      "id": "Q4",
+      "text": "（条件同第(3)问）②当点D在射线AB′上时，直接写出线段AD的长。"
+    }
+  ],
+  "reference_summary": "",
+  "uncertainties": []
+}

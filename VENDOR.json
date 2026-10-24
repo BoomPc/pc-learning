@@ -1,0 +1,53 @@
+{
+  "snapshot_date": "2026-10-15",
+  "files": [
+    {
+      "file": "engine/pipeline.py",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/pipeline.py",
+      "sha256": "8fd3970a2d620b9a28dc0b78ef56a7ae87b5d783e56d0ae0304190a20e59af2b"
+    },
+    {
+      "file": "engine/base_pipeline.py",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/base_pipeline.py",
+      "sha256": "ce7c98706181aafa4a6929b90b28cacfe647409a2708d90c41487daf49ccb609"
+    },
+    {
+      "file": "engine/presentation.py",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/presentation.py",
+      "sha256": "12540414a39a47d20861eb7fccc2c46c6de4470a9892433cc1de8c580028d217"
+    },
+    {
+      "file": "engine/native-spec.schema.json",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/native-spec.schema.json",
+      "sha256": "a3d1479524ef45d5458c02ba7dc66f87e3288603b463d1a736076a204ff47b9f"
+    },
+    {
+      "file": "engine/vendor/scripts/assembler.py",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/vendor/scripts/assembler.py",
+      "sha256": "064a7328765994fa9b4958b0637d083b60d67e6dc6659c4735e9a3ded0425bb7"
+    },
+    {
+      "file": "engine/vendor/scripts/geom_solver.py",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/vendor/scripts/geom_solver.py",
+      "sha256": "462b2c165e2f5b3691233951810f135591971358ddf879f95a88e3c9f3a2d03f"
+    },
+    {
+      "file": "engine/vendor/templates/base_problem_template.html",
+      "source": "antigravity 部署 linux/new-skill-services/webpage/vendor/templates/base_problem_template.html",
+      "sha256": "a992e243c6e1bcaab2c439a4a556f844316c4449a00d101c3e5057f0538b6aa0"
+    }
+  ],
+  "tools": "math_agent/tool_math.py: extracted standalone functions from server/math_tools.py; excludes old geometry engine and dispatch",
+  "local_changes_2026_10_15": {
+    "reason": "low56 nine-case + invariant regression",
+    "files": [
+      "engine/pipeline.py",
+      "engine/expression_runtime.py",
+      "engine/native-spec.schema.json",
+      "engine/vendor/scripts/assembler.py",
+      "engine/vendor/templates/base_problem_template.html"
+    ],
+    "evidence": "evaluation/low56/engine-changes.diff",
+    "note": "files[].sha256 remains original snapshot hash; modified engine is no longer byte-identical to upstream."
+  }
+}

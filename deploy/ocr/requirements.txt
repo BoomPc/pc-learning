@@ -1,0 +1,5 @@
+paddlepaddle==3.2.2
+paddleocr[doc-parser]==3.4.0
+paddlex[ocr]==3.4.3
+Flask==3.1.2
+waitress==3.0.2

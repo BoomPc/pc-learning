@@ -1,0 +1,56 @@
+name: math-agent
+x-common: &common
+  image: math-agent:local
+  build: .
+  init: true
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    AGENT_DATA_DIR: /data
+    REDIS_URL: redis://redis:6379/0
+  volumes:
+    - jobs:/data
+  read_only: true
+  tmpfs:
+    - /tmp:size=512m,mode=1777
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  stop_grace_period: 15s
+  depends_on:
+    redis:
+      condition: service_healthy
+services:
+  api:
+    <<: *common
+    ports: ["127.0.0.1:8000:8000"]
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+  worker:
+    <<: *common
+    command: ["python", "-m", "math_agent.cli", "worker"]
+    mem_limit: 3g
+    cpus: 2
+    shm_size: 256mb
+    healthcheck:
+      test: ["CMD", "python", "-c", "import json,time; assert time.time()-json.load(open('/data/worker-heartbeat.json'))['at']<10"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "192mb", "--maxmemory-policy", "noeviction"]
+    restart: unless-stopped
+    volumes: ["cache:/data"]
+    mem_limit: 384m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+volumes:
+  jobs:
+  cache:

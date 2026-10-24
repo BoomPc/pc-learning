@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_TITLE}}</title>
+  <style>
+    :root {
+      --bg: #07101f;
+      --panel: #0d1627;
+      --panel-2: #111e33;
+      --border: #223249;
+      --text: #e2edfd;
+      --muted: #8ea3c4;
+      --yellow: #ffd166;
+      --gold: #f59e0b;
+      --blue: #60a5fa;
+      --cyan: #2dd4bf;
+      --red: #f87171;
+      --green: #4ade80;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      line-height: 1.68;
+      background: radial-gradient(circle at 50% 0%, #0e1d37 0%, #07101f 70%);
+    }
+
+    .page {
+      width: min(1040px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 16px 0 40px;
+    }
+
+    .page-title {
+      margin: 4px 0 16px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--yellow);
+      letter-spacing: 0.5px;
+    }
+
+    /* 1. 原题常驻框 */
+    .problem-wrap {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .problem-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      background: #ffffff;
+    }
+
+    /* 2. 纯净标签栏 */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: #223249 transparent;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      padding-top: 6px;
+    }
+
+    .tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .tabs::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .tabs::-webkit-scrollbar-thumb {
+      background: #223249;
+      border-radius: 4px;
+    }
+
+    .tabs::-webkit-scrollbar-thumb:hover {
+      background: #3b506f;
+    }
+
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #0f1a2c;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: #3b506f;
+      background: var(--panel-2);
+    }
+
+    .tab-btn.active {
+      background: var(--yellow);
+      color: #0b1220;
+      border-color: var(--yellow);
+      box-shadow: 0 0 12px rgba(255, 209, 102, 0.28);
+    }
+
+    /* 3. 答题面板 */
+    .answer-panel {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px 18px;
+      scroll-margin-top: 20px;
+      position: relative;
+    }
+
+    .answer-panel.active {
+      display: block;
+    }
+
+    /* 舞台区 */
+    .stage {
+      width: 100%;
+      max-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #050b16;
+      overflow: hidden;
+      position: relative;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: default;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      max-height: 380px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* 全屏纯图标按钮 */
+    .fullscreen-btn {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 20;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: rgba(15, 26, 44, 0.85);
+      border: 1px solid #334766;
+      border-radius: 6px;
+      color: #94a3b8;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .fullscreen-btn:hover {
+      color: #ffd166;
+      border-color: #ffd166;
+      background: rgba(20, 35, 60, 0.95);
+      box-shadow: 0 0 10px rgba(255, 209, 102, 0.25);
+    }
+
+    .fullscreen-btn svg {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* 原生全屏与 Fallback 全屏统一容器样式 (真正的无界沉浸全屏黑板画布，零黑边、零多余外框) */
+    .visual-anchor:fullscreen,
+    .visual-anchor.is-fullscreen-fallback {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 999999 !important;
+      background: #050b16 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      overflow: hidden !important;
+    }
+
+    .visual-anchor:fullscreen .stage,
+    .visual-anchor.is-fullscreen-fallback .stage {
+      flex: 1 1 auto !important;
+      width: 100vw !important;
+      max-width: none !important;
+      height: 100% !important;
+      max-height: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #050b16 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      touch-action: none !important;
+      cursor: grab !important;
+    }
+
+    .visual-anchor:fullscreen .stage.is-dragging,
+    .visual-anchor.is-fullscreen-fallback .stage.is-dragging {
+      cursor: grabbing !important;
+    }
+
+    .visual-anchor:fullscreen svg,
+    .visual-anchor.is-fullscreen-fallback svg {
+      width: 100vw !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+    }
+
+    .visual-anchor:fullscreen .control-box,
+    .visual-anchor.is-fullscreen-fallback .control-box {
+      width: calc(100% - 32px) !important;
+      max-width: 960px !important;
+      margin: 0 auto 16px auto !important;
+      padding: 12px 20px !important;
+      flex-shrink: 0 !important;
+      background: rgba(13, 21, 38, 0.92) !important;
+      border: 1px solid #223249 !important;
+      border-radius: 10px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      z-index: 30 !important;
+    }
+
+    /* 控制区 */
+    .control-box {
+      margin: 12px 0 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--panel-2);
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slider-label {
+      font-weight: 700;
+      color: var(--yellow);
+      white-space: nowrap;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--yellow);
+      cursor: pointer;
+      height: 6px;
+    }
+
+    .jump-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .jump-btn {
+      flex: 1 1 calc(50% - 6px);
+      padding: 6px 14px;
+      font-size: 13px;
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      background: rgba(255, 209, 102, 0.08);
+      color: var(--yellow);
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .jump-btn:hover {
+      background: rgba(255, 209, 102, 0.2);
+      border-color: var(--yellow);
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: 100%;
+        padding: 8px 6px 30px;
+      }
+      .problem-wrap {
+        padding: 8px 6px;
+        margin-bottom: 10px;
+      }
+      .tabs {
+        margin-bottom: 8px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+      .tab-btn {
+        padding: 7px 14px;
+        font-size: 13px;
+      }
+      .answer-panel {
+        padding: 8px 6px;
+      }
+      /* 手机端定图吸顶机制：真正定死在视口顶部（Visual Anchor Sticky） */
+      .visual-anchor {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 44px; /* 紧随吸顶 tabs 下沿 */
+        z-index: 90;
+        background: var(--panel);
+        border-radius: 6px;
+        padding-bottom: 6px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+      }
+      .stage {
+        max-height: 240px;
+      }
+      .stage svg {
+        max-height: 240px;
+        width: auto;
+        margin: 0 auto;
+      }
+      .control-box {
+        margin: 8px 0 4px;
+        padding: 8px 10px;
+      }
+      .slider-row {
+        gap: 8px;
+      }
+      .jump-buttons {
+        margin-top: 6px;
+        gap: 6px;
+      }
+      .jump-btn {
+        flex: 1 1 calc(50% - 4px);
+        text-align: center;
+        padding: 6px 4px;
+        font-size: 12px;
+      }
+      .scrolling-answer {
+        margin-top: 10px;
+      }
+    }
+
+    /* 推导步骤 */
+    .steps-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step-counter;
+    }
+
+    .steps-list > li {
+      counter-increment: step-counter;
+      position: relative;
+      margin-bottom: 14px;
+      padding-left: 28px;
+      line-height: 1.7;
+      color: #d1d5db;
+    }
+
+    .steps-list > li::before {
+      content: counter(step-counter) ".";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--yellow);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .step-head {
+      color: #93c5fd;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    /* 结论框 */
+    .conclusion-box {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--yellow);
+      background: rgba(255, 209, 102, 0.12);
+      border-radius: 0 6px 6px 0;
+      color: #fff4cc;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    /* 标准原生数学排版样式 */
+    .math {
+      font-family: "Times New Roman", "Cambria Math", serif;
+      font-weight: 600;
+      padding: 0 2px;
+      display: inline;
+    }
+
+    .frac {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      vertical-align: middle;
+      line-height: 1.1;
+      text-align: center;
+      margin: 0 4px;
+      font-size: 0.95em;
+    }
+
+    .frac > span:first-child {
+      display: block;
+      border-bottom: 1.5px solid currentColor !important;
+      padding: 0 3px 2px;
+    }
+
+    .frac > span:last-child {
+      display: block;
+      padding: 2px 3px 0;
+    }
+
+    .sqrt {
+      display: inline-flex;
+      align-items: stretch;
+      vertical-align: middle;
+      line-height: 1;
+      margin: 0 1px;
+    }
+
+    .sqrt::before {
+      content: "\221A";
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.05em;
+      line-height: 1;
+      margin-right: 1px;
+    }
+
+    .sqrt-rad,
+    .sqrt > span {
+      border-top: 1.5px solid currentColor;
+      padding: 0 2px 0;
+      display: inline-block;
+      line-height: 1.1;
+    }
+  </style>
+</head>
+<body>
+  <!-- 全局 SVG 滤镜与箭头图元定义 -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8ea3c4"/>
+      </marker>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="page">
+    <h1 class="page-title">{{PAGE_TITLE}}</h1>
+
+    <!-- 1. 原题常驻框 -->
+    <div class="problem-wrap">
+      <div class="problem-img-card">
+        <img src="{{PROBLEM_IMG_SRC}}" alt="原题图片" class="problem-img" />
+      </div>
+    </div>
+
+    <!-- 2. 纯净标签栏 -->
+    <div class="tabs">
+{{TAB_BUTTONS}}
+    </div>
+
+    <!-- 3. 答题面板 -->
+{{ANSWER_PANELS}}
+  </div>
+
+  <script>
+    // ==================== 底座通用动态数学交互与温控引擎 ====================
+    const DynamicMathEngine = (function() {
+      const configs = {};
+
+      function safeEval(exprStr, t, compiled) {
+        if (typeof exprStr === 'number') {
+          if (!Number.isFinite(exprStr)) throw new Error('非有限数值');
+          return exprStr;
+        }
+        if (typeof compiled !== 'string') throw new Error('表达式缺少服务端编译结果');
+        const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        const fn = new Function(...alphabet, 'Math', 'return (' + compiled + ');');
+        const value = fn(...alphabet.map(() => t), Math);
+        if (!Number.isFinite(value)) throw new Error('表达式无定义: ' + exprStr);
+        return value;
+      }
+
+      function resolvePoint(ref, points) {
+        const point = Array.isArray(ref) ? ref : points[ref];
+        if (!point || point.length !== 2 || !point.every(Number.isFinite)) {
+          throw new Error('图元引用无效坐标: ' + String(ref));
+        }
+        return point;
+      }
+
+      function toScreen(x, y, origin, scale) {
+        return [
+          Math.round((origin[0] + x * scale) * 100) / 100,
+          Math.round((origin[1] - y * scale) * 100) / 100
+        ];
+      }
+
+      function getTempColor(diff) {
+        if (diff <= 0.035) return { color: '#4ade80', fill: 'rgba(74, 222, 128, 0.22)', status: 'hit' };
+        if (diff <= 0.45) return { color: '#f59e0b', fill: 'rgba(245, 158, 11, 0.18)', status: 'near' };
+        return { color: '#f87171', fill: 'rgba(248, 113, 113, 0.15)', status: 'far' };
+      }
+
+      function updateTab(tabIdx, tVal, autoSnap) {
+        const cfg = configs[tabIdx];
+        if (!cfg) return;
+
+        let t = parseFloat(tVal);
+        const slider = document.getElementById(cfg.sliderId);
+        const valElem = document.getElementById(cfg.sliderId + '_val');
+        const domainNote = document.getElementById(cfg.sliderId + '_domain');
+        if (valElem) {
+          valElem.textContent = Number(Number(t).toPrecision(10)).toString();
+        }
+
+        // 1. 磁吸与温控计算
+        let minDiff = Infinity;
+        let hitTarget = null;
+        if (cfg.targets && cfg.targets.length > 0) {
+          for (const tgt of cfg.targets) {
+            const val = typeof tgt === 'object' ? tgt.value : tgt;
+            const d = Math.abs(t - val);
+            if (d < minDiff) {
+              minDiff = d;
+              hitTarget = val;
+            }
+          }
+          // 显著磁吸：拖动接近目标 (偏差 <= 0.045) 时自动强力磁吸对齐锁定
+          const snapThreshold = cfg.snapRange || 0.045;
+          if (hitTarget !== null && minDiff <= snapThreshold) {
+            t = hitTarget;
+            if (slider) slider.value = t;
+            minDiff = 0;
+            if (window.navigator && window.navigator.vibrate) {
+              try { window.navigator.vibrate(10); } catch (e) {}
+            }
+          }
+        }
+
+        let tempState;
+        if (cfg.targetIntervals && cfg.targetIntervals.length > 0) {
+          let inInterval = false;
+          let distToInterval = Infinity;
+          for (const iv of cfg.targetIntervals) {
+            const minV = Math.min(iv[0], iv[1]);
+            const maxV = Math.max(iv[0], iv[1]);
+            if (t >= minV - 0.005 && t <= maxV + 0.005) {
+              inInterval = true;
+              distToInterval = 0;
+              break;
+            } else if (t < minV) {
+              distToInterval = Math.min(distToInterval, minV - t);
+            } else if (t > maxV) {
+              distToInterval = Math.min(distToInterval, t - maxV);
+            }
+          }
+          if (inInterval) {
+            tempState = { color: '#4ade80', fill: 'rgba(74, 222, 128, 0.22)', status: 'hit' };
+          } else if (distToInterval <= 0.25) {
+            tempState = { color: '#f59e0b', fill: 'rgba(245, 158, 11, 0.18)', status: 'near' };
+          } else {
+            tempState = { color: '#f87171', fill: 'rgba(248, 113, 113, 0.15)', status: 'far' };
+          }
+        } else {
+          tempState = (minDiff === Infinity)
+            ? { color: '#60a5fa', fill: 'rgba(96, 165, 250, 0.15)', status: 'none' }
+            : getTempColor(minDiff);
+        }
+
+        if (valElem) {
+          valElem.textContent = Number(Number(t).toPrecision(10)).toString();
+          if (minDiff === 0 || tempState.status === 'hit') {
+            valElem.style.color = '#4ade80';
+            valElem.style.textShadow = '0 0 10px rgba(74, 222, 128, 0.9)';
+            valElem.style.transform = 'scale(1.15)';
+          } else if (tempState.status === 'near') {
+            valElem.style.color = '#f59e0b';
+            valElem.style.textShadow = '0 0 6px rgba(245, 158, 11, 0.6)';
+            valElem.style.transform = 'scale(1.05)';
+          } else {
+            valElem.style.color = 'var(--yellow)';
+            valElem.style.textShadow = 'none';
+            valElem.style.transform = 'none';
+          }
+        }
+
+        if (slider && domainNote) {
+          const lowerOpen = slider.dataset.lowerOpen === 'true';
+          const upperOpen = slider.dataset.upperOpen === 'true';
+          const excluded = (lowerOpen && t <= +slider.min) || (upperOpen && t >= +slider.max);
+          slider.dataset.inDomain = String(!excluded);
+          domainNote.textContent = excluded ? '当前为题设不包含的端点，仅展示边界位置。' :
+            ((lowerOpen || upperOpen) ? '题设含开端点；拖至该端点时仅作边界观察。' : '');
+        }
+
+        // 2. 点坐标求解与图元更新
+        const pointCoords = { ...cfg.staticPoints };
+        if (cfg.dynamicPoints) {
+          for (const dp of cfg.dynamicPoints) {
+            let px = 0, py = 0;
+            if (dp.type === 'segment_ratio') {
+              const p1 = resolvePoint(dp.p1, pointCoords);
+              const p2 = resolvePoint(dp.p2, pointCoords);
+              if (p1 && p2) {
+                const ratio = safeEval(dp.ratio || 't', t, dp.ratioCode);
+                px = p1[0] + ratio * (p2[0] - p1[0]);
+                py = p1[1] + ratio * (p2[1] - p1[1]);
+              }
+            } else {
+              px = safeEval(dp.x, t, dp.xCode);
+              py = safeEval(dp.y, t, dp.yCode);
+            }
+            pointCoords[dp.name] = [px, py];
+
+            const [sx, sy] = toScreen(px, py, cfg.origin, cfg.scale);
+            const ptElem = document.getElementById(`dyn_pt_${tabIdx}_${dp.name}`);
+            const isIntersection = dp.isIntersection || (dp.name && dp.name.includes('交点'));
+            const ptColor = dp.color || (isIntersection ? '#4ade80' : '#ffd166');
+            if (ptElem) {
+              ptElem.setAttribute('cx', sx);
+              ptElem.setAttribute('cy', sy);
+              if (isIntersection) {
+                // 交点专属样式：绿色实心圈 (带荧光绿光晕，与黄色实心顶点颜色鲜明对比)
+                if (tempState.status === 'hit') {
+                  ptElem.setAttribute('fill', '#4ade80');
+                  ptElem.setAttribute('stroke', 'none');
+                  ptElem.setAttribute('r', '5.5');
+                  ptElem.setAttribute('filter', 'url(#glow)');
+                  ptElem.style.opacity = '1';
+                } else {
+                  // 未在3个交点有效区间时，交点半透明弱化
+                  ptElem.setAttribute('fill', '#94a3b8');
+                  ptElem.setAttribute('stroke', 'none');
+                  ptElem.setAttribute('r', '3.5');
+                  ptElem.removeAttribute('filter');
+                  ptElem.style.opacity = '0.35';
+                }
+              } else if (dp.glowOnHit && tempState.status === 'hit') {
+                ptElem.setAttribute('fill', '#4ade80');
+                ptElem.setAttribute('stroke', 'none');
+                ptElem.setAttribute('r', '5.5');
+                ptElem.setAttribute('filter', 'url(#glow)');
+                ptElem.style.opacity = '1';
+              } else {
+                // 普通几何顶点 (E, F, G, H 等)：始终保持经典几何黄色实心点，绝不被误染混淆
+                ptElem.setAttribute('fill', ptColor);
+                ptElem.setAttribute('stroke', 'none');
+                ptElem.setAttribute('r', '4');
+                ptElem.removeAttribute('filter');
+                ptElem.style.opacity = '1';
+              }
+            }
+            const labelElem = document.getElementById(`dyn_txt_${tabIdx}_${dp.name}`);
+            if (labelElem) {
+              const offset = dp.labelPos || [-16, -8];
+              labelElem.setAttribute('x', sx + offset[0]);
+              labelElem.setAttribute('y', sy + offset[1]);
+              if (isIntersection) {
+                if (tempState.status === 'hit') {
+                  labelElem.setAttribute('fill', '#4ade80');
+                  labelElem.setAttribute('font-weight', 'bold');
+                  labelElem.style.opacity = '1';
+                } else {
+                  labelElem.setAttribute('fill', '#94a3b8');
+                  labelElem.style.opacity = '0.35';
+                }
+              } else if (dp.glowOnHit && tempState.status === 'hit') {
+                labelElem.setAttribute('fill', '#4ade80');
+                labelElem.setAttribute('font-weight', 'bold');
+                labelElem.style.opacity = '1';
+              } else {
+                labelElem.setAttribute('fill', ptColor);
+                labelElem.style.opacity = '1';
+              }
+            }
+          }
+        }
+
+        // 3. 动态线段更新
+        if (cfg.dynamicLines) {
+          for (const dl of cfg.dynamicLines) {
+            const p1 = resolvePoint(dl.p1, pointCoords);
+            const p2 = resolvePoint(dl.p2, pointCoords);
+            if (p1 && p2) {
+              const [sx1, sy1] = toScreen(p1[0], p1[1], cfg.origin, cfg.scale);
+              const [sx2, sy2] = toScreen(p2[0], p2[1], cfg.origin, cfg.scale);
+              const lineElem = document.getElementById(`dyn_line_${tabIdx}_${dl.id}`);
+              if (lineElem) {
+                lineElem.setAttribute('x1', sx1);
+                lineElem.setAttribute('y1', sy1);
+                lineElem.setAttribute('x2', sx2);
+                lineElem.setAttribute('y2', sy2);
+                if (dl.tempColor) {
+                  lineElem.setAttribute('stroke', tempState.color);
+                }
+              }
+            }
+          }
+        }
+
+        // 4. 动态多边形更新
+        if (cfg.dynamicPolygons) {
+          for (const dpg of cfg.dynamicPolygons) {
+            const pts = [];
+            for (const pName of dpg.points) {
+              const p = resolvePoint(pName, pointCoords);
+              if (p) {
+                const [sx, sy] = toScreen(p[0], p[1], cfg.origin, cfg.scale);
+                pts.push(`${sx},${sy}`);
+              }
+            }
+            const polyElem = document.getElementById(`dyn_poly_${tabIdx}_${dpg.id}`);
+            if (polyElem && pts.length >= 3) {
+              polyElem.setAttribute('points', pts.join(' '));
+              if (dpg.tempColor) {
+                polyElem.setAttribute('stroke', tempState.color);
+                polyElem.setAttribute('fill', tempState.fill);
+              }
+            }
+            const clipElem = document.getElementById(`dyn_clip_poly_${tabIdx}_${dpg.id}`);
+            if (clipElem && pts.length >= 3) {
+              clipElem.setAttribute('points', pts.join(' '));
+            }
+          }
+        }
+
+        // 5. 动态几何圆更新
+        if (cfg.dynamicCircles) {
+          for (const dc of cfg.dynamicCircles) {
+            const centerPt = resolvePoint(dc.center, pointCoords);
+            const [sx, sy] = toScreen(centerPt[0], centerPt[1], cfg.origin, cfg.scale);
+            const rVal = safeEval(dc.r, t, dc.rCode);
+            const sr = Math.round(rVal * cfg.scale * 100) / 100;
+            const circleElem = document.getElementById(`dyn_circle_${tabIdx}_${dc.id}`);
+            if (circleElem) {
+              circleElem.setAttribute('cx', sx);
+              circleElem.setAttribute('cy', sy);
+              circleElem.setAttribute('r', sr);
+              if (dc.tempColor) {
+                circleElem.setAttribute('stroke', tempState.color);
+              }
+            }
+          }
+        }
+
+        // 6. 动态曲线更新 (支持动态温控、动态定义域实时重绘与剪裁内部高亮)
+        if (cfg.dynamicCurves) {
+          for (const dcv of cfg.dynamicCurves) {
+            const curveElem = document.getElementById(`dyn_curve_${tabIdx}_${dcv.id}`);
+            if (!curveElem) continue;
+            if (dcv.tempColor) {
+              curveElem.setAttribute('stroke', tempState.color);
+            }
+            if (dcv.dynamic && dcv.expr && dcv.domain) {
+              const domMin = safeEval(dcv.domain[0], t);
+              const domMax = safeEval(dcv.domain[1], t);
+              const xStart = Math.min(domMin, domMax);
+              const xEnd = Math.max(domMin, domMax);
+              if (Math.abs(xEnd - xStart) < 0.001) {
+                curveElem.setAttribute('d', '');
+                continue;
+              }
+              const steps = 80;
+              const pts = [];
+              for (let i = 0; i <= steps; i++) {
+                const cx = xStart + (xEnd - xStart) * (i / steps);
+                // 使用曲线自身的表达式计算 y
+                try {
+                  const fn = new Function('x', 'Math', 'return (' + dcv.exprCode + ');');
+                  const cy = fn(cx, Math);
+                  if (Number.isFinite(cy)) {
+                    const [scx, scy] = toScreen(cx, cy, cfg.origin, cfg.scale);
+                    pts.push(pts.length === 0 ? `M ${scx} ${scy}` : `L ${scx} ${scy}`);
+                  }
+                } catch(e) { throw e; }
+              }
+              if (pts.length > 0) {
+                curveElem.setAttribute('d', pts.join(' '));
+              }
+            }
+          }
+        }
+      }
+
+      function register(tabIdx, config) {
+        configs[tabIdx] = config;
+        const slider = document.getElementById(config.sliderId);
+        if (slider) {
+          slider.addEventListener('keydown', (e) => {
+            if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
+              e.preventDefault();
+              const direction = ['ArrowRight','ArrowUp'].includes(e.key) ? 1 : -1;
+              const next = Math.min(+slider.max, Math.max(+slider.min, +slider.value + direction * (+slider.dataset.increment || .01)));
+              slider.value = next;
+              updateTab(tabIdx, next, false);
+            }
+          });
+          slider.addEventListener('input', (e) => {
+            updateTab(tabIdx, e.target.value, false);
+          });
+          slider.addEventListener('change', (e) => {
+            updateTab(tabIdx, e.target.value, true);
+          });
+          updateTab(tabIdx, slider.value, false);
+        }
+      }
+
+      function jump(tabIdx, targetValue) {
+        const cfg = configs[tabIdx];
+        if (!cfg) return;
+        const slider = document.getElementById(cfg.sliderId);
+        if (slider) {
+          slider.value = targetValue;
+          updateTab(tabIdx, targetValue, false);
+        }
+      }
+
+      function refresh(tabIdx) {
+        const cfg = configs[tabIdx];
+        if (cfg) {
+          const slider = document.getElementById(cfg.sliderId);
+          if (slider) updateTab(tabIdx, slider.value, false);
+        }
+      }
+
+      return { register, jump, refresh };
+    })();
+
+    function switchTab(index) {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.answer-panel');
+      const tabsContainer = document.querySelector('.tabs');
+      tabs.forEach((tab, i) => {
+        if (i === index) {
+          tab.classList.add('active');
+          panels[i].classList.add('active');
+          tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          tab.classList.remove('active');
+          panels[i].classList.remove('active');
+        }
+      });
+      // 切换小问时自动复原图形缩放与位置
+      document.querySelectorAll('.stage').forEach(st => {
+        if (st.resetPanZoom) st.resetPanZoom();
+      });
+      // 手机端优化：切换小问时，若选项卡不在视口顶部，自动平滑对齐吸顶
+      if (tabsContainer && window.innerWidth <= 640) {
+        const rect = tabsContainer.getBoundingClientRect();
+        if (rect.top > 0) {
+          window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
+        }
+      }
+      DynamicMathEngine.refresh(index);
+      if (window.onTabSwitched) {
+        window.onTabSwitched(index);
+      }
+    }
+
+    // 鼠标滚轮横向滚动支持
+    const tabsContainer = document.querySelector('.tabs');
+    if (tabsContainer) {
+      tabsContainer.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          tabsContainer.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+    }
+
+    // 全屏展示控制器 (支持图+滑动条+跳转按钮完整沉浸展示)
+    function toggleVisualAnchorFullscreen(btn) {
+      const anchor = btn.closest('.visual-anchor');
+      if (!anchor) return;
+      const isFullscreen = document.fullscreenElement === anchor || anchor.classList.contains('is-fullscreen-fallback');
+      if (!isFullscreen) {
+        if (anchor.requestFullscreen) {
+          anchor.requestFullscreen().catch(() => {
+            anchor.classList.add('is-fullscreen-fallback');
+            document.body.style.overflow = 'hidden';
+            updateFullscreenIcons(anchor, true);
+          });
+        } else {
+          anchor.classList.add('is-fullscreen-fallback');
+          document.body.style.overflow = 'hidden';
+          updateFullscreenIcons(anchor, true);
+        }
+      } else {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        }
+        anchor.classList.remove('is-fullscreen-fallback');
+        document.body.style.overflow = '';
+        anchor.querySelectorAll('.stage').forEach(st => {
+          if (st.resetPanZoom) st.resetPanZoom(false);
+        });
+        updateFullscreenIcons(anchor, false);
+      }
+    }
+
+    function updateFullscreenIcons(anchor, isFs) {
+      const btn = anchor.querySelector('.fullscreen-btn');
+      if (!btn) return;
+      const enterIcon = btn.querySelector('.fs-icon-enter');
+      const exitIcon = btn.querySelector('.fs-icon-exit');
+      if (isFs) {
+        if (enterIcon) enterIcon.style.display = 'none';
+        if (exitIcon) exitIcon.style.display = 'inline-block';
+        btn.setAttribute('title', '退出全屏');
+        btn.setAttribute('aria-label', '退出全屏');
+      } else {
+        if (enterIcon) enterIcon.style.display = 'inline-block';
+        if (exitIcon) exitIcon.style.display = 'none';
+        btn.setAttribute('title', '全屏查看');
+        btn.setAttribute('aria-label', '全屏查看');
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      document.querySelectorAll('.visual-anchor').forEach(anchor => {
+        const isFs = document.fullscreenElement === anchor;
+        if (!isFs) {
+          anchor.classList.remove('is-fullscreen-fallback');
+          document.body.style.overflow = '';
+          anchor.querySelectorAll('.stage').forEach(st => {
+            if (st.resetPanZoom) st.resetPanZoom(false);
+          });
+        }
+        updateFullscreenIcons(anchor, isFs);
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.visual-anchor.is-fullscreen-fallback').forEach(anchor => {
+          anchor.classList.remove('is-fullscreen-fallback');
+          document.body.style.overflow = '';
+          anchor.querySelectorAll('.stage').forEach(st => {
+            if (st.resetPanZoom) st.resetPanZoom(false);
+          });
+          updateFullscreenIcons(anchor, false);
+        });
+      }
+    });
+
+    // 舞台纯矢量无损自由平移、双指缩放与双击复位交互引擎 (基于 SVG 原生 viewBox，彻底消除发虚模糊)
+    function initStagePanZoom() {
+      document.querySelectorAll('.stage').forEach(stage => {
+        if (stage._panZoomInitialized) return;
+        stage._panZoomInitialized = true;
+
+        const svg = stage.querySelector('svg');
+        if (!svg) return;
+
+        // 获取并记录 SVG 原生 viewBox 初始几何视口
+        const vbAttr = svg.getAttribute('viewBox') || '0 0 560 420';
+        const [origX, origY, origW, origH] = vbAttr.trim().split(/[\s,]+/).map(Number);
+        const origVb = { x: origX, y: origY, w: origW, h: origH };
+        let curVb = { ...origVb };
+
+        let isDragging = false;
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+        let isPinching = false;
+        let lastPinchDist = 0;
+        let lastPinchCenter = { x: 0, y: 0 };
+        let lastTapTime = 0;
+        let tapStartX = 0;
+        let tapStartY = 0;
+        let animFrameId = null;
+
+        function setViewBox(x, y, w, h) {
+          curVb.x = x;
+          curVb.y = y;
+          curVb.w = w;
+          curVb.h = h;
+          svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
+        }
+
+        // 双击平滑复位动画
+        function reset(animated = true) {
+          if (animFrameId) {
+            cancelAnimationFrame(animFrameId);
+            animFrameId = null;
+          }
+          if (!animated) {
+            setViewBox(origVb.x, origVb.y, origVb.w, origVb.h);
+            return;
+          }
+          const startX = curVb.x;
+          const startY = curVb.y;
+          const startW = curVb.w;
+          const startH = curVb.h;
+          const startTime = performance.now();
+          const duration = 260;
+
+          function animate(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const x = startX + (origVb.x - startX) * ease;
+            const y = startY + (origVb.y - startY) * ease;
+            const w = startW + (origVb.w - startW) * ease;
+            const h = startH + (origVb.h - startH) * ease;
+            setViewBox(x, y, w, h);
+            if (progress < 1) {
+              animFrameId = requestAnimationFrame(animate);
+            } else {
+              animFrameId = null;
+            }
+          }
+          animFrameId = requestAnimationFrame(animate);
+        }
+
+        function isFullscreenMode() {
+          const anchor = stage.closest('.visual-anchor');
+          if (!anchor) return false;
+          return document.fullscreenElement === anchor || anchor.classList.contains('is-fullscreen-fallback');
+        }
+
+        stage.resetPanZoom = reset;
+
+        // 1. PC 端双击复位 (仅在全屏下生效)
+        stage.addEventListener('dblclick', (e) => {
+          if (!isFullscreenMode() || e.target.closest('.fullscreen-btn')) return;
+          e.preventDefault();
+          reset(true);
+        });
+
+        // 2. PC 端鼠标滚轮缩放 (仅在全屏下生效，非全屏下正常顺畅滚动网页)
+        stage.addEventListener('wheel', (e) => {
+          if (!isFullscreenMode() || e.target.closest('.fullscreen-btn')) return;
+          e.preventDefault();
+          const rect = stage.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+
+          const mx = e.clientX - rect.left;
+          const my = e.clientY - rect.top;
+
+          const svgX = curVb.x + (mx / rect.width) * curVb.w;
+          const svgY = curVb.y + (my / rect.height) * curVb.h;
+
+          const factor = e.deltaY < 0 ? 1.15 : 0.87;
+          let newW = curVb.w / factor;
+          let newH = curVb.h / factor;
+
+          const scaleRatio = origVb.w / newW;
+          if (scaleRatio < 0.35) {
+            newW = origVb.w / 0.35;
+            newH = origVb.h / 0.35;
+          } else if (scaleRatio > 12.0) {
+            newW = origVb.w / 12.0;
+            newH = origVb.h / 12.0;
+          }
+
+          const newX = svgX - (mx / rect.width) * newW;
+          const newY = svgY - (my / rect.height) * newH;
+          setViewBox(newX, newY, newW, newH);
+        }, { passive: false });
+
+        // 3. PC 端鼠标拖拽平移 (仅在全屏下生效)
+        stage.addEventListener('mousedown', (e) => {
+          if (!isFullscreenMode() || e.button !== 0 || e.target.closest('.fullscreen-btn')) return;
+          isDragging = true;
+          stage.classList.add('is-dragging');
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging || !isFullscreenMode()) return;
+          const rect = stage.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+
+          const dx = e.clientX - lastMouseX;
+          const dy = e.clientY - lastMouseY;
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+
+          const svgDx = dx * (curVb.w / rect.width);
+          const svgDy = dy * (curVb.h / rect.height);
+          setViewBox(curVb.x - svgDx, curVb.y - svgDy, curVb.w, curVb.h);
+        });
+
+        window.addEventListener('mouseup', () => {
+          if (isDragging) {
+            isDragging = false;
+            stage.classList.remove('is-dragging');
+          }
+        });
+
+        // 4. 移动端触摸交互：单指平移 + 双指捏合缩放 + 双击复位 (仅在全屏下生效，非全屏下正常上下滑动浏览页面)
+        function getTouchDist(t1, t2) {
+          const dx = t1.clientX - t2.clientX;
+          const dy = t1.clientY - t2.clientY;
+          return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function getTouchCenter(t1, t2) {
+          return {
+            x: (t1.clientX + t2.clientX) / 2,
+            y: (t1.clientY + t2.clientY) / 2
+          };
+        }
+
+        stage.addEventListener('touchstart', (e) => {
+          if (!isFullscreenMode() || e.target.closest('.fullscreen-btn')) return;
+
+          if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            const now = Date.now();
+            const distFromLast = Math.hypot(touch.clientX - tapStartX, touch.clientY - tapStartY);
+
+            if (now - lastTapTime < 320 && distFromLast < 25) {
+              e.preventDefault();
+              reset(true);
+              lastTapTime = 0;
+              return;
+            }
+            lastTapTime = now;
+            tapStartX = touch.clientX;
+            tapStartY = touch.clientY;
+
+            isDragging = true;
+            isPinching = false;
+            stage.classList.add('is-dragging');
+            lastMouseX = touch.clientX;
+            lastMouseY = touch.clientY;
+          } else if (e.touches.length === 2) {
+            isDragging = false;
+            isPinching = true;
+            stage.classList.remove('is-dragging');
+            lastPinchDist = getTouchDist(e.touches[0], e.touches[1]);
+            lastPinchCenter = getTouchCenter(e.touches[0], e.touches[1]);
+          }
+        }, { passive: false });
+
+        stage.addEventListener('touchmove', (e) => {
+          if (!isFullscreenMode() || e.target.closest('.fullscreen-btn')) return;
+          e.preventDefault();
+
+          const rect = stage.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+
+          if (isPinching && e.touches.length === 2) {
+            const curDist = getTouchDist(e.touches[0], e.touches[1]);
+            const curCenter = getTouchCenter(e.touches[0], e.touches[1]);
+
+            if (lastPinchDist > 5) {
+              const factor = curDist / lastPinchDist;
+              const mx = curCenter.x - rect.left;
+              const my = curCenter.y - rect.top;
+
+              const svgX = curVb.x + (mx / rect.width) * curVb.w;
+              const svgY = curVb.y + (my / rect.height) * curVb.h;
+
+              let newW = curVb.w / factor;
+              let newH = curVb.h / factor;
+
+              const scaleRatio = origVb.w / newW;
+              if (scaleRatio >= 0.35 && scaleRatio <= 12.0) {
+                const dx = curCenter.x - lastPinchCenter.x;
+                const dy = curCenter.y - lastPinchCenter.y;
+                const svgDx = dx * (newW / rect.width);
+                const svgDy = dy * (newH / rect.height);
+
+                const newX = svgX - (mx / rect.width) * newW - svgDx;
+                const newY = svgY - (my / rect.height) * newH - svgDy;
+                setViewBox(newX, newY, newW, newH);
+              }
+            }
+
+            lastPinchDist = curDist;
+            lastPinchCenter = curCenter;
+          } else if (isDragging && e.touches.length === 1) {
+            const touch = e.touches[0];
+            const dx = touch.clientX - lastMouseX;
+            const dy = touch.clientY - lastMouseY;
+            lastMouseX = touch.clientX;
+            lastMouseY = touch.clientY;
+
+            const svgDx = dx * (curVb.w / rect.width);
+            const svgDy = dy * (curVb.h / rect.height);
+            setViewBox(curVb.x - svgDx, curVb.y - svgDy, curVb.w, curVb.h);
+          }
+        }, { passive: false });
+
+        stage.addEventListener('touchend', (e) => {
+          if (!isFullscreenMode()) {
+            isDragging = false;
+            isPinching = false;
+            stage.classList.remove('is-dragging');
+            return;
+          }
+          if (e.touches.length === 0) {
+            isDragging = false;
+            isPinching = false;
+            stage.classList.remove('is-dragging');
+          } else if (e.touches.length === 1) {
+            isPinching = false;
+            isDragging = true;
+            stage.classList.add('is-dragging');
+            lastMouseX = e.touches[0].clientX;
+            lastMouseY = e.touches[0].clientY;
+          }
+        });
+
+        stage.addEventListener('touchcancel', () => {
+          isDragging = false;
+          isPinching = false;
+          stage.classList.remove('is-dragging');
+        });
+      });
+    }
+
+    // 页面加载完成后立即初始化平移缩放引擎
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStagePanZoom);
+    } else {
+      initStagePanZoom();
+    }
+
+{{PAGE_SCRIPTS}}
+  </script>
+</body>
+</html>

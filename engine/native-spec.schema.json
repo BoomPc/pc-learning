@@ -1,0 +1,728 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MathProblemConfiguration",
+  "description": "中考数学固定底座极简声明式业务数据契约 (Zero-JS Contract)",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "题目名称，必须与目标文件夹名称及HTML文件名完全一致",
+      "maxLength": 100
+    },
+    "tabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "tab_title",
+          "steps",
+          "conclusion"
+        ],
+        "properties": {
+          "tab_title": {
+            "type": "string",
+            "description": "选项卡标题，如：第(1)问：求抛物线解析式"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "static",
+              "dynamic"
+            ],
+            "default": "static"
+          },
+          "stage": {
+            "type": "object",
+            "properties": {
+              "viewBox": {
+                "type": "string",
+                "default": "0 0 560 420"
+              },
+              "origin": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "scale": {
+                "type": "number",
+                "default": 64
+              },
+              "axis": {
+                "type": "object",
+                "properties": {
+                  "show": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "xLabel": {
+                    "type": "string",
+                    "default": "x"
+                  },
+                  "yLabel": {
+                    "type": "string",
+                    "default": "y"
+                  }
+                }
+              },
+              "curves": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "expr",
+                    "domain"
+                  ],
+                  "properties": {
+                    "expr": {
+                      "type": "string"
+                    },
+                    "domain": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "color": {
+                      "type": "string"
+                    },
+                    "dashed": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "p1",
+                    "p2"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "p1": {
+                      "description": "点名字符串或[x,y]坐标",
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      ]
+                    },
+                    "p2": {
+                      "description": "点名字符串或[x,y]坐标",
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      ]
+                    },
+                    "color": {
+                      "type": "string"
+                    },
+                    "temp_color": {
+                      "type": "boolean",
+                      "description": "是否开启三阶温控色彩渐变反馈"
+                    },
+                    "dashed": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "polygons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "points"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "points": {
+                      "type": "array",
+                      "description": "顶点名称数组或坐标列表",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        ]
+                      }
+                    },
+                    "stroke": {
+                      "type": "string"
+                    },
+                    "fill": {
+                      "type": "string"
+                    },
+                    "temp_color": {
+                      "type": "boolean",
+                      "description": "是否随动点变换三阶温控色"
+                    }
+                  }
+                }
+              },
+              "circles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "center",
+                    "r"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "center": {
+                      "description": "圆心点名或[x, y]坐标",
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      ]
+                    },
+                    "r": {
+                      "type": [
+                        "number",
+                        "string"
+                      ],
+                      "description": "半径数值或表达式"
+                    },
+                    "color": {
+                      "type": "string"
+                    },
+                    "fill": {
+                      "type": "string"
+                    },
+                    "dashed": {
+                      "type": "boolean"
+                    },
+                    "temp_color": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "points": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "coord": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "dynamic": {
+                      "type": "object",
+                      "description": "动点声明式配置 (支持 x,y 代数式或线段定比分点)",
+                      "properties": {
+                        "x": {
+                          "type": [
+                            "string",
+                            "number"
+                          ]
+                        },
+                        "y": {
+                          "type": [
+                            "string",
+                            "number"
+                          ]
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "segment_ratio"
+                          ]
+                        },
+                        "p1": {
+                          "type": "string"
+                        },
+                        "p2": {
+                          "type": "string"
+                        },
+                        "ratio": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "color": {
+                      "type": "string"
+                    },
+                    "labelPos": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "label": {
+                      "type": "string",
+                      "maxLength": 80,
+                      "description": "显示点名，必须忠实于题图，如 A′；name保留内部标识。"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "controls": {
+            "type": "object",
+            "description": "动态问交互控件 (动静态严格区分，静态问绝不设置)",
+            "properties": {
+              "slider": {
+                "type": "object",
+                "required": [
+                  "min",
+                  "max"
+                ],
+                "properties": {
+                  "slider_id": {
+                    "type": "string"
+                  },
+                  "slider_label": {
+                    "type": "string"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  },
+                  "step": {
+                    "type": "number",
+                    "default": 0.01
+                  },
+                  "default": {
+                    "type": "number"
+                  },
+                  "min_inclusive": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否包含该端点；false时边界仅用于观察，不属于题设。"
+                  },
+                  "max_inclusive": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否包含该端点；false时边界仅用于观察，不属于题设。"
+                  }
+                }
+              },
+              "solution_targets": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "精准答案解列表 (仅在此数值处触发荧光绿与金光光晕，端点不要放入)"
+              },
+              "jump_buttons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "text",
+                    "value"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "必须且只能为具体解或临界值，如：跳转①：t = 1"
+                    },
+                    "value": {
+                      "type": "number"
+                    },
+                    "is_target": {
+                      "type": "boolean",
+                      "description": "是否为命中答案解 (默认根据文案自动识别)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "head",
+                "content"
+              ],
+              "properties": {
+                "head": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "conclusion": {
+            "type": "string"
+          }
+        }
+      },
+      "maxItems": 12,
+      "minItems": 1
+    },
+    "problem_text": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "stage": {
+      "type": "object",
+      "properties": {
+        "viewBox": {
+          "type": "string",
+          "default": "0 0 560 420"
+        },
+        "origin": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "scale": {
+          "type": "number",
+          "default": 64
+        },
+        "axis": {
+          "type": "object",
+          "properties": {
+            "show": {
+              "type": "boolean",
+              "default": true
+            },
+            "xLabel": {
+              "type": "string",
+              "default": "x"
+            },
+            "yLabel": {
+              "type": "string",
+              "default": "y"
+            }
+          }
+        },
+        "curves": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "expr",
+              "domain"
+            ],
+            "properties": {
+              "expr": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "color": {
+                "type": "string"
+              },
+              "dashed": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "p1",
+              "p2"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "p1": {
+                "description": "点名字符串或[x,y]坐标",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                ]
+              },
+              "p2": {
+                "description": "点名字符串或[x,y]坐标",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                ]
+              },
+              "color": {
+                "type": "string"
+              },
+              "temp_color": {
+                "type": "boolean",
+                "description": "是否开启三阶温控色彩渐变反馈"
+              },
+              "dashed": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "polygons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "points"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "points": {
+                "type": "array",
+                "description": "顶点名称数组或坐标列表",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    }
+                  ]
+                }
+              },
+              "stroke": {
+                "type": "string"
+              },
+              "fill": {
+                "type": "string"
+              },
+              "temp_color": {
+                "type": "boolean",
+                "description": "是否随动点变换三阶温控色"
+              }
+            }
+          }
+        },
+        "circles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "center",
+              "r"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "center": {
+                "description": "圆心点名或[x, y]坐标",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                ]
+              },
+              "r": {
+                "type": [
+                  "number",
+                  "string"
+                ],
+                "description": "半径数值或表达式"
+              },
+              "color": {
+                "type": "string"
+              },
+              "fill": {
+                "type": "string"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "temp_color": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "coord": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "dynamic": {
+                "type": "object",
+                "description": "动点声明式配置 (支持 x,y 代数式或线段定比分点)",
+                "properties": {
+                  "x": {
+                    "type": [
+                      "string",
+                      "number"
+                    ]
+                  },
+                  "y": {
+                    "type": [
+                      "string",
+                      "number"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "segment_ratio"
+                    ]
+                  },
+                  "p1": {
+                    "type": "string"
+                  },
+                  "p2": {
+                    "type": "string"
+                  },
+                  "ratio": {
+                    "type": "string"
+                  }
+                }
+              },
+              "color": {
+                "type": "string"
+              },
+              "labelPos": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 80,
+                "description": "显示点名，必须忠实于题图，如 A′；name保留内部标识。"
+              }
+            }
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    }
+  },
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "title",
+        "tabs"
+      ],
+      "not": {
+        "required": [
+          "error"
+        ]
+      }
+    },
+    {
+      "required": [
+        "error"
+      ],
+      "maxProperties": 1
+    }
+  ]
+}
